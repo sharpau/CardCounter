@@ -6,7 +6,7 @@
     <string name="title_section1">History</string>
     <string name="title_section2">Current</string>
     <string name="title_section3">Scoring</string>
-    <string name="switch_button">Switch Scoring Method</string>
+    <string name="switch_button">Switch</string>
 
     <string-array name="melds">
         <item>Aces Around</item>

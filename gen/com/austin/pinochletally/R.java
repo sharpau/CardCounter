@@ -37,11 +37,11 @@ public final class R {
         public static final int fragment_history=0x7f090002;
         public static final int fragment_scoring=0x7f090004;
         public static final int fragment_scoring_melds=0x7f090005;
-        public static final int fragment_scoring_tricks=0x7f090007;
-        public static final int fragment_scoring_tricks_simple=0x7f090006;
+        public static final int fragment_scoring_tricks=0x7f090008;
+        public static final int fragment_scoring_tricks_simple=0x7f090007;
         public static final int pager=0x7f090000;
         public static final int section_label=0x7f090003;
-        public static final int switch_scoring_button=0x7f090008;
+        public static final int switch_scoring_button=0x7f090006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

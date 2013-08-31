@@ -269,7 +269,7 @@ public class MainActivity extends FragmentActivity implements
 			GridLayout trickLayout = (GridLayout)rootView.findViewById(R.id.fragment_scoring_tricks);
 
 			String[] tricks = getResources().getStringArray(R.array.tricks_alt);
-			String[] trickValues = getResources().getStringArray(R.array.tricks_alt);
+			String[] trickValues = getResources().getStringArray(R.array.trick_alt_values);
 			
 			Assert.assertEquals(tricks.length, trickValues.length);
 
