@@ -11,19 +11,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridLayout.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
@@ -220,9 +216,6 @@ public class MainActivity extends FragmentActivity implements
 			// click listener
 	        Button switchBtn = (Button) rootView.findViewById(R.id.switch_scoring_button);
 	        switchBtn.setOnClickListener(this);
-			
-			// root layout
-			LinearLayout layout = (LinearLayout)rootView.findViewById(R.id.fragment_scoring);
 			
 			// layout for meld items
 			GridLayout meldLayout = (GridLayout)rootView.findViewById(R.id.fragment_scoring_melds);

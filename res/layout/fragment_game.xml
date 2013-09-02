@@ -5,5 +5,147 @@
     android:orientation="vertical"
     android:id="@+id/fragment_game" >
     
+    <!-- team names -->
+ 	<LinearLayout
+ 	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    <EditText
+	        android:id="@+id/team1name"
+	   	    android:layout_width="0dp"
+	   	    android:layout_weight="1"
+	   	    android:layout_height="wrap_content"
+	   	    android:hint="Team 1" />
+	    <EditText
+	        android:id="@+id/team2name"
+	   	    android:layout_width="0dp"
+	   	    android:layout_weight="1"
+	   	    android:layout_height="wrap_content"
+	   	    android:hint="Team 2" />
+	    
+    </LinearLayout>
+    
+ 	<!-- scores entered, to be summed -->
+ 	<ScrollView 
+ 	    android:id="@+id/score_scroll"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    
+ 	    <GridLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="5dp"
+		    android:columnCount="2"
+		    android:id="@+id/score_grid" />
+ 	    
+ 	</ScrollView>
+ 	
+ 	<!-- two columns -->
+ 	<GridLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_margin="5dp"
+		    android:columnCount="2"
+		    android:id="@+id/bottom_grid" >
+ 	
+ 	    <!-- sum lines -->
+ 	    
+ 	    <LinearLayout 
+ 	        android:orientation="horizontal"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:layout_column="0"
+			android:layout_columnSpan="2"
+ 	        >
+ 	        
+ 	        <Space
+				android:layout_width="0dp"
+				android:layout_height="1dp"
+ 	            android:layout_weight="1" />
+ 	        
+			<View
+				android:layout_width="0dp"
+				android:layout_height="1dp"
+				android:layout_weight="1"
+				android:background="@android:color/black" />
+			
+			<View
+				android:layout_width="0dp"
+				android:layout_height="1dp"
+				android:layout_weight="1"
+				android:background="@android:color/black" />
+ 	        
+ 	    </LinearLayout>
+
+ 	
+	 	<!-- sums total scores -->
+	 	<TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+			android:layout_column="0"
+			android:layout_columnSpan="1"
+	 	    android:id="@+id/team1_score"
+	 	    android:hint="0" />
+	 	<TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+			android:layout_column="1"
+			android:layout_columnSpan="1"
+	 	    android:id="@+id/team2_score"
+	 	    android:hint="0" />
+	 	
+	 	
+	 	<!-- entry for meld points -->
+	    <EditText
+	        android:id="@+id/team1_meld"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="0"
+			android:layout_columnSpan="1"
+	   	    android:hint="0" />
+	    <EditText
+	        android:id="@+id/team2_meld"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="1"
+			android:layout_columnSpan="1"
+	   	    android:hint="0" />
+	 	
+	 	<!-- entry for trick points -->
+	    <EditText
+	        android:id="@+id/team1_tricks"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="0"
+			android:layout_columnSpan="1"
+	   	    android:hint="0" />
+	    <EditText
+	        android:id="@+id/team2_tricks"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="1"
+			android:layout_columnSpan="1"
+	   	    android:hint="0" />
+	 	
+	 	
+	 	<!-- current bid & trump suit -->
+	    <EditText
+	        android:id="@+id/bid"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="0"
+			android:layout_columnSpan="1"
+	   	    android:hint="Bid" />
+	    <EditText
+	        android:id="@+id/trump"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+			android:layout_column="1"
+			android:layout_columnSpan="1"
+	   	    android:hint="Trump" />
+	 	
+ 	
+    </GridLayout>
 
 </LinearLayout>
