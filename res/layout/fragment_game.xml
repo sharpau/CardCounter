@@ -132,6 +132,7 @@
 		 	<!-- entry for meld points -->
 		    <EditText
 		        android:id="@+id/team1_meld"
+		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="0dp"
 		 	    android:layout_weight="1"
@@ -140,6 +141,7 @@
 		 	<!-- entry for trick points -->
 		    <EditText
 		        android:id="@+id/team1_tricks"
+		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="0dp"
 		 	    android:layout_weight="1"
@@ -173,6 +175,7 @@
 		 	<!-- entry for meld points -->
 		    <EditText
 		        android:id="@+id/team2_meld"
+		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="0dp"
 		 	    android:layout_weight="1"
@@ -181,6 +184,7 @@
 		 	<!-- entry for trick points -->
 		    <EditText
 		        android:id="@+id/team2_tricks"
+		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="0dp"
 		 	    android:layout_weight="1"
@@ -193,6 +197,7 @@
  	<!-- current bid & trump suit -->
     <EditText
         android:id="@+id/bid"
+        android:inputType="number"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
    	    android:hint="Bid" />

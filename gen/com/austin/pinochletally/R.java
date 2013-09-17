@@ -43,14 +43,14 @@ public final class R {
         public static final int pager=0x7f090000;
         public static final int section_label=0x7f09000e;
         public static final int switch_scoring_button=0x7f090011;
-        public static final int team1_meld=0x7f090005;
-        public static final int team1_score=0x7f090004;
+        public static final int team1_meld=0x7f090006;
+        public static final int team1_score=0x7f090005;
         public static final int team1_scroll=0x7f090003;
-        public static final int team1_tricks=0x7f090006;
+        public static final int team1_tricks=0x7f090007;
         public static final int team1name=0x7f090002;
         public static final int team2_meld=0x7f090009;
         public static final int team2_score=0x7f090008;
-        public static final int team2_scroll=0x7f090007;
+        public static final int team2_scroll=0x7f090004;
         public static final int team2_tricks=0x7f09000a;
         public static final int trump=0x7f09000c;
     }
