@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_history" >
+    android:orientation="vertical" >
     
+    <GridLayout
+        android:id="@+id/history_grid"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+	    
+        android:useDefaultMargins="true"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false"
 
-</ListView>
+        android:columnCount="4" >
+    
+        <TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	   	    android:layout_row="0"
+	   	    android:layout_column="0"
+	 	    android:text="Winning Team" />
+        <TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	   	    android:layout_row="0"
+	   	    android:layout_column="1"
+	 	    android:text="Score" />
+        <TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	   	    android:layout_row="0"
+	   	    android:layout_column="2"
+	 	    android:text="Losing Team" />
+        <TextView
+	 	    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	   	    android:layout_row="0"
+	   	    android:layout_column="3"
+	 	    android:text="Score" />
+        
+	</GridLayout>
+    
+</ScrollView>

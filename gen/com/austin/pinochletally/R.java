@@ -38,11 +38,11 @@ public final class R {
         public static final int bidding_team=0x7f090010;
         public static final int error_msg=0x7f09000d;
         public static final int fragment_game=0x7f090001;
-        public static final int fragment_history=0x7f090011;
         public static final int fragment_scoring=0x7f090013;
         public static final int fragment_scoring_melds=0x7f090014;
         public static final int fragment_scoring_tricks=0x7f090017;
         public static final int fragment_scoring_tricks_simple=0x7f090016;
+        public static final int history_grid=0x7f090011;
         public static final int pager=0x7f090000;
         public static final int section_label=0x7f090012;
         public static final int switch_scoring_button=0x7f090015;
