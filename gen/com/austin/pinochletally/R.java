@@ -32,18 +32,19 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090016;
+        public static final int action_settings=0x7f090017;
         public static final int bid=0x7f09000d;
+        public static final int bidding_team=0x7f09000f;
         public static final int fragment_game=0x7f090001;
-        public static final int fragment_history=0x7f09000f;
-        public static final int fragment_scoring=0x7f090011;
-        public static final int fragment_scoring_melds=0x7f090012;
-        public static final int fragment_scoring_tricks=0x7f090015;
-        public static final int fragment_scoring_tricks_simple=0x7f090014;
+        public static final int fragment_history=0x7f090010;
+        public static final int fragment_scoring=0x7f090012;
+        public static final int fragment_scoring_melds=0x7f090013;
+        public static final int fragment_scoring_tricks=0x7f090016;
+        public static final int fragment_scoring_tricks_simple=0x7f090015;
         public static final int pager=0x7f090000;
-        public static final int section_label=0x7f090010;
+        public static final int section_label=0x7f090011;
         public static final int sum_scores=0x7f09000c;
-        public static final int switch_scoring_button=0x7f090013;
+        public static final int switch_scoring_button=0x7f090014;
         public static final int team1_meld=0x7f090005;
         public static final int team1_score=0x7f090004;
         public static final int team1_scroll=0x7f090003;

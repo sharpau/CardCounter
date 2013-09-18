@@ -18,9 +18,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridLayout.LayoutParams;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -79,6 +82,7 @@ public class MainActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		mViewPager.setCurrentItem(1);
 	}
 
 	@Override
@@ -185,7 +189,10 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 	
-	public static class GameFragment extends Fragment {
+	public static class GameFragment extends Fragment implements OnClickListener {
+		
+		int mTeam1Score = 0;
+		int mTeam2Score = 0;
 
 		public GameFragment() {
 		}
@@ -197,6 +204,106 @@ public class MainActivity extends FragmentActivity implements
 					container, false);
 			
 			return rootView;
+		}
+		
+		@Override
+		public void onClick(View view) {
+			switch(view.getId()) {
+			case R.id.sum_scores:
+				/*
+				 * lots of error checking
+				 * 		melds & tricks have numbers (fail = do nothing)
+				 * 		tricks add to 250 (fail = do nothing)
+				 * 		bid value entered (fail = check if made or set, then continue)
+				 * 
+				 * add meld & trick scores to each team's scroll, recalc total score
+				 * if game over, announce win, ask about archiving game
+				 * 
+				 */
+				EditText meld1 = (EditText)getActivity().findViewById(R.id.team1_meld);
+				int meld1val = Integer.parseInt(meld1.getText().toString());
+
+				EditText meld2 = (EditText)getActivity().findViewById(R.id.team2_meld);
+				int meld2val = Integer.parseInt(meld2.getText().toString());
+
+				EditText trick1 = (EditText)getActivity().findViewById(R.id.team1_tricks);
+				int trick1val = Integer.parseInt(trick1.getText().toString());
+
+				EditText trick2 = (EditText)getActivity().findViewById(R.id.team2_tricks);
+				int trick2val = Integer.parseInt(trick2.getText().toString());
+
+				EditText bid = (EditText)getActivity().findViewById(R.id.bid);
+				int bidval = Integer.parseInt(bid.getText().toString());
+				
+				ToggleButton team = (ToggleButton)getActivity().findViewById(R.id.bidding_team);
+				Boolean team1 = team.isChecked();
+				
+				if(trick1val + trick2val != 250) {
+					// error
+					return;
+				}
+				if(team1) {
+					if(bidval > meld1val + trick1val) {
+						// set
+						addTeam1Score(0);
+						addTeam1Score(-1 * bidval);
+					}
+					else {
+						// made it
+						addTeam1Score(meld1val);
+						addTeam1Score(trick1val);
+					}
+					if(trick2val > 0) {
+						// saved meld
+						addTeam2Score(meld2val);
+						addTeam2Score(trick2val);
+					}
+				}
+				else {
+					if(bidval > meld2val + trick2val) {
+						// set
+						addTeam2Score(0);
+						addTeam2Score(-1 * bidval);
+					}
+					else {
+						// made it
+						addTeam2Score(meld2val);
+						addTeam2Score(trick2val);
+					}
+					if(trick1val > 0) {
+						// saved meld
+						addTeam1Score(meld1val);
+						addTeam1Score(trick1val);
+					}
+				}
+				
+				
+				break;
+			default:
+				break;
+			
+			}
+			
+		}
+		
+		private void addTeam1Score(Integer value) {
+			mTeam1Score += value;
+			ScrollView s = (ScrollView)getActivity().findViewById(R.id.team1_scroll);
+			// add textview
+			TextView newScore = new TextView(getActivity());
+			newScore.setText(value.toString());
+			
+			s.addView(newScore);
+		}
+		
+		private void addTeam2Score(Integer value) {
+			mTeam2Score += value;
+			ScrollView s = (ScrollView)getActivity().findViewById(R.id.team2_scroll);
+			// add textview
+			TextView newScore = new TextView(getActivity());
+			newScore.setText(value.toString());
+			
+			s.addView(newScore);
 		}
 	}
 	
