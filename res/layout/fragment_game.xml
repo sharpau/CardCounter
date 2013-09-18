@@ -1,241 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/fragment_game" >
-    
-    <!-- names and scrollviews -->
-    <GridLayout
- 	    android:layout_width="match_parent"
+    android:orientation="vertical" >
+	<LinearLayout
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:id="@+id/fragment_game" >
 	    
-        android:useDefaultMargins="true"
-        android:alignmentMode="alignBounds"
-        android:columnOrderPreserved="false"
-
-        android:columnCount="3"
-        android:rowCount="6" >
-        
-        <!-- column 0 = labels -->
-	 	<TextView
-	 	    android:layout_width="wrap_content"
+	    <!-- names and scrollviews -->
+	    <GridLayout
+	 	    android:layout_width="match_parent"
 	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="0"
-	   	    android:layout_column="0"
-	 	    android:text="Team Name" />
-	 	
-        <TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="3"
-	   	    android:layout_column="0"
-	 	    android:text="Total Score" />
-	 	
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="4"
-	   	    android:layout_column="0"
-	 	    android:text="Meld Points" />
-	 	
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="5"
-	   	    android:layout_column="0"
-	 	    android:text="Trick Points" />
-        
-        <!-- column 1 = team 1 -->
-	    <EditText
-	        android:id="@+id/team1name"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="0"
-	   	    android:layout_column="1"
-	   	    android:layout_gravity="right"
-	   	    android:hint="Team 1" />
+		    
+	        android:useDefaultMargins="true"
+	        android:alignmentMode="alignBounds"
+	        android:columnOrderPreserved="false"
+	
+	        android:columnCount="3"
+	        android:rowCount="6" >
+	        
+	        <!-- column 0 = labels -->
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="0"
+		   	    android:layout_column="0"
+		 	    android:text="Team Name" />
+		 	
+	        <TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="3"
+		   	    android:layout_column="0"
+		 	    android:text="Total Score" />
+		 	
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="4"
+		   	    android:layout_column="0"
+		 	    android:text="Meld Points" />
+		 	
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="5"
+		   	    android:layout_column="0"
+		 	    android:text="Trick Points" />
+	        
+	        <!-- column 1 = team 1 -->
+		    <EditText
+		        android:id="@+id/team1name"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="0"
+		   	    android:layout_column="1"
+		   	    android:layout_gravity="right"
+		   	    android:hint="Team 1" />
+		    
+		    <!-- scores entered, to be summed -->
+		    <LinearLayout
+			    android:id="@+id/team1_list"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+		   	    android:layout_row="1"
+		   	    android:layout_column="1"
+			    android:orientation="vertical"
+			    android:layout_gravity="right" />
+		 	
+		 	<!-- sum line -->
+		 	<View
+	            android:layout_width="80dp"
+				android:layout_height="1dp"
+		   	    android:layout_row="2"
+		   	    android:layout_column="1"
+		   	    android:layout_gravity="right"
+				android:background="@android:color/black" />
+		 	
+		 	<!-- sums total scores -->
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="3"
+		   	    android:layout_column="1"
+		   	    android:layout_gravity="right"
+		 	    android:id="@+id/team1_score"
+		 	    android:textSize="18sp"
+		 	    android:hint="0" />
+		 	
+		 	<!-- entry for meld points -->
+		    <EditText
+		        android:id="@+id/team1_meld"
+		        android:inputType="number"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="4"
+		   	    android:layout_column="1"
+		   	    android:layout_gravity="right"
+		   	    android:hint="0" />
+		    
+		 	<!-- entry for trick points -->
+		    <EditText
+		        android:id="@+id/team1_tricks"
+		        android:inputType="number"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="5"
+		   	    android:layout_column="1"
+		   	    android:layout_gravity="right"
+		   	    android:hint="0" />
+		    
+	        <!-- column 2 = team 2 -->
+		    <EditText
+		        android:id="@+id/team2name"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="0"
+		   	    android:layout_column="2"
+		   	    android:layout_gravity="right"
+		   	    android:hint="Team 2" />
+		    
+	        <!-- scores entered, to be summed -->
+		    <!-- scores entered, to be summed -->
+		    <LinearLayout
+			    android:id="@+id/team2_list"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+		   	    android:layout_row="1"
+		   	    android:layout_column="2"
+			    android:orientation="vertical"
+			    android:layout_gravity="right" />
+		 	
+		 	<!-- sum line -->
+		 	<View
+	            android:layout_width="80dp"
+				android:layout_height="1dp"
+		   	    android:layout_row="2"
+		   	    android:layout_column="2"
+		   	    android:layout_gravity="right"
+				android:background="@android:color/black" />
+		 	
+		 	<!-- sums total scores -->
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="3"
+		   	    android:layout_column="2"
+		   	    android:layout_gravity="right"
+		 	    android:id="@+id/team2_score"
+		 	    android:textSize="18sp"
+		 	    android:hint="0" />
+		 	
+		 	<!-- entry for meld points -->
+		    <EditText
+		        android:id="@+id/team2_meld"
+		        android:inputType="number"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="4"
+		   	    android:layout_column="2"
+		   	    android:layout_gravity="right"
+		   	    android:hint="0" />
+		    
+		 	<!-- entry for trick points -->
+		    <EditText
+		        android:id="@+id/team2_tricks"
+		        android:inputType="number"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="5"
+		   	    android:layout_column="2"
+		   	    android:layout_gravity="right"
+		   	    android:hint="0" />
+		    
+	    </GridLayout>
+		    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+		    
+	        
+		    <!-- button to add scores up -->
+		    <Button
+		        android:id="@+id/add_scores"
+		   	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:text="Add Scores"
+		   	    android:layout_gravity="center_horizontal"
+		   	    android:onClick="addScores"
+		         />
+		    
+		    <TextView
+				android:id="@+id/error_msg"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+	        
+	    </LinearLayout>
 	    
-	    <!-- scores entered, to be summed -->
-	 	<ScrollView 
-	 	    android:id="@+id/team1_scroll"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-	   	    android:layout_row="1"
-	   	    android:layout_column="1"
-		    android:orientation="vertical" />
-	 	
-	 	<!-- sum line -->
-	 	<View
-            android:layout_width="80dp"
-			android:layout_height="1dp"
-	   	    android:layout_row="2"
-	   	    android:layout_column="1"
-	   	    android:layout_gravity="right"
-			android:background="@android:color/black" />
-	 	
-	 	<!-- sums total scores -->
-	 	<TextView
-	 	    android:layout_width="wrap_content"
+	    <GridLayout
+	 	    android:layout_width="match_parent"
 	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="3"
-	   	    android:layout_column="1"
-	   	    android:layout_gravity="right"
-	 	    android:id="@+id/team1_score"
-	 	    android:textSize="18sp"
-	 	    android:hint="0" />
+	        android:layout_margin="1dp"
+	        android:alignmentMode="alignBounds"
+	        android:columnOrderPreserved="false"
+	
+	        android:columnCount="2"
+	        android:rowCount="3" >
 	 	
-	 	<!-- entry for meld points -->
-	    <EditText
-	        android:id="@+id/team1_meld"
-	        android:inputType="number"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="4"
-	   	    android:layout_column="1"
-	   	    android:layout_gravity="right"
-	   	    android:hint="0" />
-	    
-	 	<!-- entry for trick points -->
-	    <EditText
-	        android:id="@+id/team1_tricks"
-	        android:inputType="number"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="5"
-	   	    android:layout_column="1"
-	   	    android:layout_gravity="right"
-	   	    android:hint="0" />
-	    
-        <!-- column 2 = team 2 -->
-	    <EditText
-	        android:id="@+id/team2name"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="0"
-	   	    android:layout_column="2"
-	   	    android:layout_gravity="right"
-	   	    android:hint="Team 2" />
-	    
-        <!-- scores entered, to be summed -->
-	 	<ScrollView 
-	 	    android:id="@+id/team2_scroll"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-	   	    android:layout_row="1"
-	   	    android:layout_column="2"
-		    android:orientation="vertical" />
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="0"
+		   	    android:layout_column="0"
+		 	    android:text="Current Bid" />
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="1"
+		   	    android:layout_column="0"
+		 	    android:text="Trump Suit" />
+		 	<TextView
+		 	    android:layout_width="wrap_content"
+		 	    android:layout_height="wrap_content"
+		   	    android:layout_row="2"
+		   	    android:layout_column="0"
+		   	    android:text="Bidding Team" />
+		 	
+		 	<!-- current bid & trump suit -->
+		    <EditText
+		        android:id="@+id/bid"
+		        android:inputType="number"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="0"
+		   	    android:layout_column="1"
+		   	    android:hint="250" />
+		    <EditText
+		        android:id="@+id/trump"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_row="1"
+		   	    android:layout_column="1"
+		   	    android:hint="Hearts" />
+			<ToggleButton 
+			    android:id="@+id/bidding_team"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+		   	    android:layout_row="2"
+		   	    android:layout_column="1"
+			    android:textOn="Team 1"
+			    android:textOff="Team 2" />
+			
+		 	</GridLayout>
 	 	
-	 	<!-- sum line -->
-	 	<View
-            android:layout_width="80dp"
-			android:layout_height="1dp"
-	   	    android:layout_row="2"
-	   	    android:layout_column="2"
-	   	    android:layout_gravity="right"
-			android:background="@android:color/black" />
-	 	
-	 	<!-- sums total scores -->
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="3"
-	   	    android:layout_column="2"
-	   	    android:layout_gravity="right"
-	 	    android:id="@+id/team2_score"
-	 	    android:textSize="18sp"
-	 	    android:hint="0" />
-	 	
-	 	<!-- entry for meld points -->
-	    <EditText
-	        android:id="@+id/team2_meld"
-	        android:inputType="number"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="4"
-	   	    android:layout_column="2"
-	   	    android:layout_gravity="right"
-	   	    android:hint="0" />
-	    
-	 	<!-- entry for trick points -->
-	    <EditText
-	        android:id="@+id/team2_tricks"
-	        android:inputType="number"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="5"
-	   	    android:layout_column="2"
-	   	    android:layout_gravity="right"
-	   	    android:hint="0" />
-	    
-    </GridLayout>
-	    
-    <!-- button to add scores up -->
-    <Button
-        android:id="@+id/sum_scores"
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content"
-   	    android:text="Add Scores"
-   	    android:layout_gravity="center_horizontal"
-         />
-    <!-- TODO clear and new game buttons -->
-    
-    <GridLayout
- 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    
-        android:useDefaultMargins="true"
-        android:alignmentMode="alignBounds"
-        android:columnOrderPreserved="false"
-
-        android:columnCount="2"
-        android:rowCount="3" >
- 	
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="0"
-	   	    android:layout_column="0"
-	 	    android:text="Current Bid" />
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="1"
-	   	    android:layout_column="0"
-	 	    android:text="Trump Suit" />
-	 	<TextView
-	 	    android:layout_width="wrap_content"
-	 	    android:layout_height="wrap_content"
-	   	    android:layout_row="2"
-	   	    android:layout_column="0"
-	   	    android:text="Bidding Team" />
-	 	
-	 	<!-- current bid & trump suit -->
-	    <EditText
-	        android:id="@+id/bid"
-	        android:inputType="number"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="0"
-	   	    android:layout_column="1"
-	   	    android:hint="250" />
-	    <EditText
-	        android:id="@+id/trump"
-	   	    android:layout_width="wrap_content"
-	   	    android:layout_height="wrap_content"
-	   	    android:layout_row="1"
-	   	    android:layout_column="1"
-	   	    android:hint="Hearts" />
-		<ToggleButton 
-		    android:id="@+id/bidding_team"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-	   	    android:layout_row="2"
-	   	    android:layout_column="1"
-		    android:textOn="Team 1"
-		    android:textOff="Team 2" />
-		
-	 	</GridLayout>
- 	
-
-</LinearLayout>
+	
+	</LinearLayout>
+</ScrollView>
