@@ -64,7 +64,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		 * 
 		 */
 		TextView err = (TextView)getActivity().findViewById(R.id.error_msg);
-		err.setTextColor(color.holo_red_dark);
+		//err.setTextColor(color.holo_red_dark); TODO this makes the text disappear??
 		
 		EditText name1 = (EditText)getActivity().findViewById(R.id.team1name);
 		String name1val;
@@ -212,7 +212,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
-			err.setTextColor(color.holo_green_light);
+			//err.setTextColor(color.holo_green_light);
 			err.setText("Team 1 wins! Game saved to History");
 		}
 		else if(mTeam2Score > 1500) {
@@ -235,7 +235,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
-			err.setTextColor(color.holo_green_light);
+			//err.setTextColor(color.holo_green_light); TODO makes text disappear
 			err.setText("Team 2 wins! Game saved to History");
 		}
 	}
