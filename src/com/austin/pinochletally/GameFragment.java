@@ -21,6 +21,8 @@ public class GameFragment extends Fragment implements OnClickListener {
 		
 	Integer mTeam1Score = 0;
 	Integer mTeam2Score = 0;
+	int[] mSavedTeam1Scores;
+	int[] mSavedTeam2Scores;
 
 	public GameFragment() {
 	}
@@ -37,9 +39,23 @@ public class GameFragment extends Fragment implements OnClickListener {
         Button undoBtn = (Button) rootView.findViewById(R.id.undo);
         undoBtn.setOnClickListener(this);
         Button clearBtn = (Button) rootView.findViewById(R.id.clear);
-        clearBtn.setOnClickListener(this);
-		
+        clearBtn.setOnClickListener(this);		
 		return rootView;
+	}
+	
+	@Override
+	public void onViewStateRestored(Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		
+
+        if(((MainActivity)getActivity()).mTeam1Scores != null && ((MainActivity)getActivity()).mTeam2Scores != null) {
+		    for(int score : ((MainActivity)getActivity()).mTeam1Scores) {
+		    	addTeam1Score(score);
+		    }
+		    for(int score : ((MainActivity)getActivity()).mTeam2Scores) {
+		    	addTeam2Score(score);
+		    }
+        }
 	}
 	
 	@Override
@@ -136,6 +152,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		scrollArea2.invalidate();
 	}
 	
+	// add to total scores based on values entered
 	public void addScores(View view) {
 		/*
 		 * lots of error checking

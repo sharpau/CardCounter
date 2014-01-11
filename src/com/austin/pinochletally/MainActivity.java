@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +46,15 @@ public class MainActivity extends FragmentActivity implements
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    HistoryFragment mHFrag;
+    GameFragment mGFrag;
+    ScoringFragment mSFrag;
+    
+    
+    static final String TEAM1_SCORES = "team1Scores";
+    static final String TEAM2_SCORES = "team2Scores";
+    public int[] mTeam1Scores;
+    public int[] mTeam2Scores;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +136,40 @@ public class MainActivity extends FragmentActivity implements
 					.setTabListener(this));
 		}
 		mViewPager.setCurrentItem(1);
+		
+		// tabs are set up, now restore status
+		if (savedInstanceState != null) {
+	        // Restore value of members from saved state
+			// Restore state members from saved instance
+		    mTeam1Scores = savedInstanceState.getIntArray(TEAM1_SCORES);
+		    mTeam2Scores = savedInstanceState.getIntArray(TEAM2_SCORES);
+	    }
+
 	}
 
+	// Override to save scores already entered
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		LinearLayout scrollArea1 = (LinearLayout)findViewById(R.id.team1_list);
+		int[] team1Scores = new int[scrollArea1.getChildCount()];
+		for(int i = 0; i < scrollArea1.getChildCount(); i++) {
+			team1Scores[i] = Integer.parseInt(((TextView)scrollArea1.getChildAt(i)).getText().toString());
+		}
+		savedInstanceState.putIntArray(TEAM1_SCORES, team1Scores);
+		
+		LinearLayout scrollArea2 = (LinearLayout)findViewById(R.id.team2_list);
+		int[] team2Scores = new int[scrollArea2.getChildCount()];
+		for(int i = 0; i < scrollArea2.getChildCount(); i++) {
+			team2Scores[i] = Integer.parseInt(((TextView)scrollArea2.getChildAt(i)).getText().toString());
+		}
+		savedInstanceState.putIntArray(TEAM2_SCORES, team2Scores);
+		
+		
+	    // Always call the superclass so it can save the view hierarchy state
+	    super.onSaveInstanceState(savedInstanceState);
+	}
+
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -170,20 +212,20 @@ public class MainActivity extends FragmentActivity implements
 			Bundle args;
 			switch(position) {
 			case 0:
-				fragment = new HistoryFragment();
+				mHFrag = new HistoryFragment();
 				args = new Bundle();
-				fragment.setArguments(args);
-				break;
+				mHFrag.setArguments(args);
+				return mHFrag;
 			case 1:
-				fragment = new GameFragment();
+				mGFrag = new GameFragment();
 				args = new Bundle();
-				fragment.setArguments(args);
-				break;
+				mGFrag.setArguments(args);
+				return mGFrag;
 			case 2:
-				fragment = new ScoringFragment();
+				mSFrag = new ScoringFragment();
 				args = new Bundle();
-				fragment.setArguments(args);
-				break;
+				mSFrag.setArguments(args);
+				return mSFrag;
 			default:
 				// Return a DummySectionFragment (defined as a static inner class
 				// below) with the page number as its lone argument.
@@ -191,9 +233,8 @@ public class MainActivity extends FragmentActivity implements
 				args = new Bundle();
 				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
-				break;
+				return fragment;
 			}
-			return fragment;
 		}
 
 		@Override
