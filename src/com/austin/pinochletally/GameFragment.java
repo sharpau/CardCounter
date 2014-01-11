@@ -36,6 +36,8 @@ public class GameFragment extends Fragment implements OnClickListener {
         addBtn.setOnClickListener(this);
         Button undoBtn = (Button) rootView.findViewById(R.id.undo);
         undoBtn.setOnClickListener(this);
+        Button clearBtn = (Button) rootView.findViewById(R.id.clear);
+        clearBtn.setOnClickListener(this);
 		
 		return rootView;
 	}
@@ -49,6 +51,8 @@ public class GameFragment extends Fragment implements OnClickListener {
 		case R.id.undo:
 			undo(view);
 			break;
+		case R.id.clear:
+			clear(view);
 		default:
 			break;
 		
@@ -56,6 +60,42 @@ public class GameFragment extends Fragment implements OnClickListener {
 		
 	}
 	
+	// reset scores page entirely
+	public void clear(View view) {
+		mTeam1Score = 0;
+		mTeam2Score = 0;
+		LinearLayout scrollArea1 = (LinearLayout)getActivity().findViewById(R.id.team1_list);
+		LinearLayout scrollArea2 = (LinearLayout)getActivity().findViewById(R.id.team2_list);
+		scrollArea1.removeAllViews();
+		scrollArea2.removeAllViews();
+		scrollArea1.invalidate();
+		scrollArea2.invalidate();
+
+
+		// update total scores
+		TextView score1 = (TextView)getActivity().findViewById(R.id.team1_score);
+		score1.setText(mTeam1Score.toString());
+		
+		TextView score2 = (TextView)getActivity().findViewById(R.id.team2_score);
+		score2.setText(mTeam2Score.toString());
+		
+		// zero out various entries
+		EditText meld1 = (EditText)getActivity().findViewById(R.id.team1_meld);
+		EditText meld2 = (EditText)getActivity().findViewById(R.id.team2_meld);
+		EditText trick1 = (EditText)getActivity().findViewById(R.id.team1_tricks);
+		EditText trick2 = (EditText)getActivity().findViewById(R.id.team2_tricks);
+		EditText bid = (EditText)getActivity().findViewById(R.id.bid);
+		TextView err = (TextView)getActivity().findViewById(R.id.error_msg);
+		meld1.setText("");
+		trick1.setText("");
+		meld2.setText("");
+		trick2.setText("");
+		bid.setText("");
+		
+		err.setText("");
+	}
+	
+	// remove last set of scores entered
 	public void undo(View view) {
 		// make sure we have something to undo
 		LinearLayout scrollArea1 = (LinearLayout)getActivity().findViewById(R.id.team1_list);
