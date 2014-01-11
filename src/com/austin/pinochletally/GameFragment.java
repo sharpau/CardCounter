@@ -34,6 +34,8 @@ public class GameFragment extends Fragment implements OnClickListener {
 		// click listener
         Button addBtn = (Button) rootView.findViewById(R.id.add_scores);
         addBtn.setOnClickListener(this);
+        Button undoBtn = (Button) rootView.findViewById(R.id.undo);
+        undoBtn.setOnClickListener(this);
 		
 		return rootView;
 	}
@@ -44,11 +46,54 @@ public class GameFragment extends Fragment implements OnClickListener {
 		case R.id.add_scores:
 			addScores(view);
 			break;
+		case R.id.undo:
+			undo(view);
+			break;
 		default:
 			break;
 		
 		}
 		
+	}
+	
+	public void undo(View view) {
+		// make sure we have something to undo
+		LinearLayout scrollArea1 = (LinearLayout)getActivity().findViewById(R.id.team1_list);
+		LinearLayout scrollArea2 = (LinearLayout)getActivity().findViewById(R.id.team2_list);
+		if(scrollArea1.getChildCount() < 2 || scrollArea2.getChildCount() < 2) {
+			return;
+		}
+		
+		// get IDs of the last 2 text boxes in each LinearLayout
+		TextView v1 = (TextView) scrollArea1.getChildAt(scrollArea1.getChildCount() - 1);
+		TextView v2 = (TextView) scrollArea1.getChildAt(scrollArea1.getChildCount() - 2);
+		Integer toSubtract = Integer.parseInt(v1.getText().toString()) + Integer.parseInt(v2.getText().toString());
+		mTeam1Score -= toSubtract;
+		
+		// remove text boxes
+		scrollArea1.removeViewAt(scrollArea1.getChildCount() - 1);
+		scrollArea1.removeViewAt(scrollArea1.getChildCount() - 1);
+
+		// figure out scores to subtract
+		TextView total1 = (TextView)getActivity().findViewById(R.id.team1_score);
+		Integer newTotal = Integer.parseInt(total1.getText().toString()) - toSubtract;
+		total1.setText(newTotal.toString());
+		scrollArea1.invalidate();
+
+		TextView v3 = (TextView) scrollArea2.getChildAt(scrollArea2.getChildCount() - 1);
+		TextView v4 = (TextView) scrollArea2.getChildAt(scrollArea2.getChildCount() - 2);
+		toSubtract = Integer.parseInt(v3.getText().toString()) + Integer.parseInt(v4.getText().toString());
+		mTeam2Score -= toSubtract;
+		
+		// remove text boxes
+		scrollArea2.removeViewAt(scrollArea2.getChildCount() - 1);
+		scrollArea2.removeViewAt(scrollArea2.getChildCount() - 1);
+
+		// figure out scores to subtract
+		TextView total2 = (TextView)getActivity().findViewById(R.id.team2_score);
+		newTotal = Integer.parseInt(total2.getText().toString()) - toSubtract;
+		total2.setText(newTotal.toString());
+		scrollArea2.invalidate();
 	}
 	
 	public void addScores(View view) {
