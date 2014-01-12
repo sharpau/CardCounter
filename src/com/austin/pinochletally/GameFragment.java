@@ -276,12 +276,6 @@ public class GameFragment extends Fragment implements OnClickListener {
 			}
 		}
 
-		// update total scores
-		TextView score1 = (TextView)getActivity().findViewById(R.id.team1_score);
-		score1.setText(mTeam1Score.toString());
-		
-		TextView score2 = (TextView)getActivity().findViewById(R.id.team2_score);
-		score2.setText(mTeam2Score.toString());
 		
 		// zero out various entries
 		meld1.setText("");
@@ -349,6 +343,10 @@ public class GameFragment extends Fragment implements OnClickListener {
 		newScore.setText(value.toString());
 		
 		scrollArea.addView(newScore);
+		
+		// update total scores
+		TextView score1 = (TextView)getActivity().findViewById(R.id.team1_score);
+		score1.setText(mTeam1Score.toString());
 	}
 	
 	private void addTeam2Score(Integer value) {
@@ -359,5 +357,8 @@ public class GameFragment extends Fragment implements OnClickListener {
 		newScore.setText(value.toString());
 		
 		scrollArea.addView(newScore);
+		
+		TextView score2 = (TextView)getActivity().findViewById(R.id.team2_score);
+		score2.setText(mTeam2Score.toString());
 	}
 }
