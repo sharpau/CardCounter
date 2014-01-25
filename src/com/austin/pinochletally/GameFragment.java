@@ -7,10 +7,12 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -39,7 +41,24 @@ public class GameFragment extends Fragment implements OnClickListener {
         Button undoBtn = (Button) rootView.findViewById(R.id.undo);
         undoBtn.setOnClickListener(this);
         Button clearBtn = (Button) rootView.findViewById(R.id.clear);
-        clearBtn.setOnClickListener(this);		
+        clearBtn.setOnClickListener(this);
+        
+        EditText editText = (EditText) rootView.findViewById(R.id.team1_tricks);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean handled = false;
+		        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+		            int val = Integer.parseInt(v.getText().toString());
+		            EditText tricks2 = (EditText) getActivity().findViewById(R.id.team2_tricks);
+		            tricks2.setText(Integer.toString(250 - val));
+		            //handled = true;
+		        }
+		        return handled;
+			}
+        });
+        
+        
 		return rootView;
 	}
 	
