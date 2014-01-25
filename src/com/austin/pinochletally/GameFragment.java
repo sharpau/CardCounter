@@ -4,6 +4,7 @@ import com.austin.pinochletally.HistoryContract.HistoryEntry;
 
 import android.R.color;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class GameFragment extends Fragment implements OnClickListener {
@@ -95,6 +97,14 @@ public class GameFragment extends Fragment implements OnClickListener {
 		
 	}
 	
+	public void errorToast(String errorMsg) {
+		Context context = getActivity().getApplicationContext();
+		int duration = Toast.LENGTH_SHORT;
+		
+		Toast toast = Toast.makeText(context, errorMsg, duration);
+		toast.show();
+	}
+	
 	// reset scores page entirely
 	public void clear(View view) {
 		mTeam1Score = 0;
@@ -120,14 +130,11 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText trick1 = (EditText)getActivity().findViewById(R.id.team1_tricks);
 		EditText trick2 = (EditText)getActivity().findViewById(R.id.team2_tricks);
 		EditText bid = (EditText)getActivity().findViewById(R.id.bid);
-		TextView err = (TextView)getActivity().findViewById(R.id.error_msg);
 		meld1.setText("");
 		trick1.setText("");
 		meld2.setText("");
 		trick2.setText("");
 		bid.setText("");
-		
-		err.setText("");
 	}
 	
 	// remove last set of scores entered
@@ -183,8 +190,6 @@ public class GameFragment extends Fragment implements OnClickListener {
 		 * if game over, announce win, ask about archiving game
 		 * 
 		 */
-		TextView err = (TextView)getActivity().findViewById(R.id.error_msg);
-		//err.setTextColor(color.holo_red_dark); TODO this makes the text disappear??
 		
 		EditText name1 = (EditText)getActivity().findViewById(R.id.team1name);
 		String name1val;
@@ -207,8 +212,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText meld1 = (EditText)getActivity().findViewById(R.id.team1_meld);
 		if(meld1.getText().length() < 1) {
 			// error
-			err.setText("Invalid team 1 meld amount");
-			err.invalidate();
+			errorToast("Invalid team 1 meld amount");
 			return;
 		}
 		int meld1val = Integer.parseInt(meld1.getText().toString());
@@ -216,7 +220,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText meld2 = (EditText)getActivity().findViewById(R.id.team2_meld);
 		if(meld2.getText().length() < 1) {
 			// error
-			err.setText("Invalid team 2 meld amount");
+			errorToast("Invalid team 2 meld amount");
 			return;
 		}
 		int meld2val = Integer.parseInt(meld2.getText().toString());
@@ -224,7 +228,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText trick1 = (EditText)getActivity().findViewById(R.id.team1_tricks);
 		if(trick1.getText().length() < 1) {
 			// error
-			err.setText("Invalid team 1 trick amount");
+			errorToast("Invalid team 1 trick amount");
 			return;
 		}
 		int trick1val = Integer.parseInt(trick1.getText().toString());
@@ -232,7 +236,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText trick2 = (EditText)getActivity().findViewById(R.id.team2_tricks);
 		if(trick2.getText().length() < 1) {
 			// error
-			err.setText("Invalid team 2 trick amount");
+			errorToast("Invalid team 2 trick amount");
 			return;
 		}
 		int trick2val = Integer.parseInt(trick2.getText().toString());
@@ -240,7 +244,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 		EditText bid = (EditText)getActivity().findViewById(R.id.bid);
 		if(bid.getText().length() < 3) {
 			// error
-			err.setText("Invalid bid amount");
+			errorToast("Invalid bid amount");
 			return;
 		}
 		int bidval = Integer.parseInt(bid.getText().toString());
@@ -251,12 +255,12 @@ public class GameFragment extends Fragment implements OnClickListener {
 		
 		if(trick1val + trick2val != 250) {
 			// error
-			err.setText("Trick values do not add to 250");
+			errorToast("Trick values do not add to 250");
 			return;
 		}
 		if(bidval < 250) {
 			// error
-			err.setText("Bid value below 250");
+			errorToast("Bid value below 250");
 			return;
 		}
 		
@@ -303,8 +307,6 @@ public class GameFragment extends Fragment implements OnClickListener {
 		trick2.setText("");
 		bid.setText("");
 		
-		err.setText("");
-		
 		// check if game has ended
 		if((team1 && mTeam1Score > 1500) || (mTeam1Score > 1500 && mTeam2Score < 1500)) {
 			// bid and go out, or don't bid and go out when the other team doesn't
@@ -326,8 +328,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
-			//err.setTextColor(color.holo_green_light);
-			err.setText("Team 1 wins! Game saved to History");
+			errorToast("Team 1 wins! Game saved to History");
 		}
 		else if(mTeam2Score > 1500) {
 			// other team didn't win, and we went out, so we win
@@ -349,8 +350,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
-			//err.setTextColor(color.holo_green_light); TODO makes text disappear
-			err.setText("Team 2 wins! Game saved to History");
+			errorToast("Team 2 wins! Game saved to History");
 		}
 	}
 	
