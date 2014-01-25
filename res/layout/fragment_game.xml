@@ -52,12 +52,15 @@
 	        
 	        <!-- column 1 = team 1 -->
 		    <EditText
-		        android:id="@+id/team1name"
+		        android:id="@id/team1name"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="0"
 		   	    android:layout_column="1"
 		   	    android:layout_gravity="right"
+		   	    android:singleLine="true"
+		   	    android:imeOptions="actionNext"
+		   	    android:nextFocusDown="@id/team2name"
 		   	    android:hint="Team 1" />
 		    
 		    <!-- scores entered, to be summed -->
@@ -92,34 +95,39 @@
 		 	
 		 	<!-- entry for meld points -->
 		    <EditText
-		        android:id="@+id/team1_meld"
+		        android:id="@id/team1_meld"
 		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="4"
 		   	    android:layout_column="1"
 		   	    android:layout_gravity="right"
+		   	    android:nextFocusDown="@id/team2_meld"
 		   	    android:hint="0" />
 		    
 		 	<!-- entry for trick points -->
 		    <EditText
-		        android:id="@+id/team1_tricks"
+		        android:id="@id/team1_tricks"
 		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="5"
 		   	    android:layout_column="1"
 		   	    android:layout_gravity="right"
+		   	    android:nextFocusDown="@id/team2_tricks"
 		   	    android:hint="0" />
 		    
 	        <!-- column 2 = team 2 -->
 		    <EditText
-		        android:id="@+id/team2name"
+		        android:id="@id/team2name"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="0"
 		   	    android:layout_column="2"
 		   	    android:layout_gravity="right"
+		   	    android:singleLine="true"
+		   	    android:imeOptions="actionNext"
+		   	    android:nextFocusDown="@id/team1_meld"
 		   	    android:hint="Team 2" />
 		    
 		    <!-- scores entered, to be summed -->
@@ -154,24 +162,26 @@
 		 	
 		 	<!-- entry for meld points -->
 		    <EditText
-		        android:id="@+id/team2_meld"
+		        android:id="@id/team2_meld"
 		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="4"
 		   	    android:layout_column="2"
 		   	    android:layout_gravity="right"
+		   	    android:nextFocusDown="@id/team1_tricks"
 		   	    android:hint="0" />
 		    
 		 	<!-- entry for trick points -->
 		    <EditText
-		        android:id="@+id/team2_tricks"
+		        android:id="@id/team2_tricks"
 		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="5"
 		   	    android:layout_column="2"
 		   	    android:layout_gravity="right"
+		   	    android:nextFocusDown="@id/bid"
 		   	    android:hint="0" />
 		    
 	    </GridLayout>
@@ -250,19 +260,22 @@
 		 	
 		 	<!-- current bid & trump suit -->
 		    <EditText
-		        android:id="@+id/bid"
+		        android:id="@id/bid"
 		        android:inputType="number"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="0"
 		   	    android:layout_column="1"
+		   	    android:nextFocusDown="@id/trump"
 		   	    android:hint="250" />
 		    <EditText
-		        android:id="@+id/trump"
+		        android:id="@id/trump"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
 		   	    android:layout_row="1"
 		   	    android:layout_column="1"
+		   	    android:singleLine="true"
+		   	    android:imeOptions="actionDone"
 		   	    android:hint="Hearts" />
 			<ToggleButton 
 			    android:id="@+id/bidding_team"
