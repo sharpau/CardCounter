@@ -191,6 +191,11 @@ public class GameFragment extends Fragment implements OnClickListener {
 		 * 
 		 */
 		
+		if(mTeam1Score > 1500 || mTeam2Score > 1500) {
+			errorToast("Game already over. You may undo to add scores.");
+			return;
+		}
+		
 		EditText name1 = (EditText)getActivity().findViewById(R.id.team1name);
 		String name1val;
 		if(name1.getText().length() < 1) {
