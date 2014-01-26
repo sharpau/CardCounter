@@ -333,6 +333,10 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
+			// Add to the history fragment
+			HistoryFragment historyFrag = (HistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
+			
 			errorToast("Team 1 wins! Game saved to History");
 		}
 		else if(mTeam2Score > 1500) {

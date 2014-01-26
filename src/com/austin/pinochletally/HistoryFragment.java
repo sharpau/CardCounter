@@ -15,13 +15,63 @@ import android.widget.TextView;
 
 public class HistoryFragment extends Fragment {
 
+	int numRows = 1; // starts at 1 to account for header row
+	View rootView;
+
 	public HistoryFragment() {
+	}
+	
+	public void addGameEntry(String winningTeam, String losingTeam, String winningScore, String losingScore) {
+		GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
+	    // set up the grid with the list of games in history
+		historyGrid.setRowCount(numRows + 2);
+		
+		GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
+		// add textviews
+		TextView winningTeamText = new TextView(getActivity());
+		winningTeamText.setText(winningTeam);
+		lp = new GridLayout.LayoutParams();
+		lp.columnSpec = GridLayout.spec(0);
+		lp.rowSpec = GridLayout.spec(numRows);
+		lp.height = LayoutParams.WRAP_CONTENT;
+		lp.width = LayoutParams.WRAP_CONTENT;
+		historyGrid.addView(winningTeamText, lp);
+
+		TextView winningScoreText = new TextView(getActivity());
+		winningScoreText.setText(winningScore);
+		lp = new GridLayout.LayoutParams();
+		lp.columnSpec = GridLayout.spec(1);
+		lp.rowSpec = GridLayout.spec(numRows);
+		lp.height = LayoutParams.WRAP_CONTENT;
+		lp.width = LayoutParams.WRAP_CONTENT;
+		historyGrid.addView(winningScoreText, lp);
+
+		TextView losingTeamText = new TextView(getActivity());
+		losingTeamText.setText(losingTeam);
+		lp = new GridLayout.LayoutParams();
+		lp.columnSpec = GridLayout.spec(2);
+		lp.rowSpec = GridLayout.spec(numRows);
+		lp.height = LayoutParams.WRAP_CONTENT;
+		lp.width = LayoutParams.WRAP_CONTENT;
+		historyGrid.addView(losingTeamText, lp);
+
+		TextView losingScoreText = new TextView(getActivity());
+		losingScoreText.setText(losingScore);
+		lp = new GridLayout.LayoutParams();
+		lp.columnSpec = GridLayout.spec(3);
+		lp.rowSpec = GridLayout.spec(numRows);
+		lp.height = LayoutParams.WRAP_CONTENT;
+		lp.width = LayoutParams.WRAP_CONTENT;
+		historyGrid.addView(losingScoreText, lp);
+		
+		numRows++;
+		rootView.invalidate();
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_history,
+		rootView = inflater.inflate(R.layout.fragment_history,
 				container, false);
 		
 		// populate with list of past games
@@ -47,58 +97,18 @@ public class HistoryFragment extends Fragment {
 	        sortOrder                                 // The sort order
 	        );
 
-	    // set up the grid with the list of games in history
-		GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
-		historyGrid.setRowCount(cursor.getCount() + 1);
 
 		cursor.moveToFirst();
-		int row = 1;
 		while(!cursor.isAfterLast()) {
 			String winningTeam = cursor.getString(cursor.getColumnIndexOrThrow(HistoryEntry.COLUMN_NAME_WINNING_TEAM));
 			String winningScore = cursor.getString(cursor.getColumnIndexOrThrow(HistoryEntry.COLUMN_NAME_WINNING_SCORE));
 			String losingTeam = cursor.getString(cursor.getColumnIndexOrThrow(HistoryEntry.COLUMN_NAME_LOSING_TEAM));
 			String losingScore = cursor.getString(cursor.getColumnIndexOrThrow(HistoryEntry.COLUMN_NAME_LOSING_SCORE));
 
-			GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
-			// add textviews
-			TextView winningTeamText = new TextView(getActivity());
-			winningTeamText.setText(winningTeam);
-			lp = new GridLayout.LayoutParams();
-			lp.columnSpec = GridLayout.spec(0);
-			lp.rowSpec = GridLayout.spec(row);
-			lp.height = LayoutParams.WRAP_CONTENT;
-			lp.width = LayoutParams.WRAP_CONTENT;
-			historyGrid.addView(winningTeamText, lp);
-
-			TextView winningScoreText = new TextView(getActivity());
-			winningScoreText.setText(winningScore);
-			lp = new GridLayout.LayoutParams();
-			lp.columnSpec = GridLayout.spec(1);
-			lp.rowSpec = GridLayout.spec(row);
-			lp.height = LayoutParams.WRAP_CONTENT;
-			lp.width = LayoutParams.WRAP_CONTENT;
-			historyGrid.addView(winningScoreText, lp);
-
-			TextView losingTeamText = new TextView(getActivity());
-			losingTeamText.setText(losingTeam);
-			lp = new GridLayout.LayoutParams();
-			lp.columnSpec = GridLayout.spec(2);
-			lp.rowSpec = GridLayout.spec(row);
-			lp.height = LayoutParams.WRAP_CONTENT;
-			lp.width = LayoutParams.WRAP_CONTENT;
-			historyGrid.addView(losingTeamText, lp);
-
-			TextView losingScoreText = new TextView(getActivity());
-			losingScoreText.setText(losingScore);
-			lp = new GridLayout.LayoutParams();
-			lp.columnSpec = GridLayout.spec(3);
-			lp.rowSpec = GridLayout.spec(row);
-			lp.height = LayoutParams.WRAP_CONTENT;
-			lp.width = LayoutParams.WRAP_CONTENT;
-			historyGrid.addView(losingScoreText, lp);
+			addGameEntry(winningTeam, losingTeam, winningScore, losingScore);
 			
 			cursor.moveToNext();
-			row++;		}
+		}
 		
 		return rootView;
 	}
