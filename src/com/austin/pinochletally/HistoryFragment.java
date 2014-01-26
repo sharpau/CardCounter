@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements OnClickListener {
 
 	int numRows = 1; // starts at 1 to account for header row
 	View rootView;
@@ -24,7 +26,7 @@ public class HistoryFragment extends Fragment {
 	public void addGameEntry(String winningTeam, String losingTeam, String winningScore, String losingScore) {
 		GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
 	    // set up the grid with the list of games in history
-		historyGrid.setRowCount(numRows + 2);
+		historyGrid.setRowCount(numRows + 1);
 		
 		GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
 		// add textviews
@@ -74,6 +76,10 @@ public class HistoryFragment extends Fragment {
 		rootView = inflater.inflate(R.layout.fragment_history,
 				container, false);
 		
+		// setup clear history button
+        Button clearBtn = (Button) rootView.findViewById(R.id.clear_history);
+        clearBtn.setOnClickListener(this);
+		
 		// populate with list of past games
 		HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -111,5 +117,27 @@ public class HistoryFragment extends Fragment {
 		}
 		
 		return rootView;
+	}
+
+	@Override
+	public void onClick(View view) {
+		switch(view.getId()) {
+		case R.id.clear_history:
+			HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
+			SQLiteDatabase db = mDbHelper.getReadableDatabase();
+			String[] empty = null;
+			db.delete(HistoryEntry.TABLE_NAME, "", empty);
+			
+
+			GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
+			historyGrid.removeAllViews();
+			numRows = 1;
+			addGameEntry("Winning Team", "Losing Team", "Score", "Score");
+			historyGrid.invalidate();
+			break;
+		default:
+			break;
+		
+		}
 	}
 }

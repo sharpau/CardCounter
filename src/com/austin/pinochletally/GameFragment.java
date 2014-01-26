@@ -333,6 +333,8 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         null,
 			         values);
 			
+			// reference for super sketch fragment getting method:
+			// http://stackoverflow.com/questions/7379165/update-data-in-listfragment-as-part-of-viewpager/8886019#8886019			
 			// Add to the history fragment
 			HistoryFragment historyFrag = (HistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
 			historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
