@@ -1,4 +1,4 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
 import java.util.Locale;
 import android.app.ActionBar;
@@ -46,9 +46,9 @@ public class MainActivity extends FragmentActivity implements
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    HistoryFragment mHFrag;
-    GameFragment mGFrag;
-    ScoringFragment mSFrag;
+    PinochleHistoryFragment mHFrag;
+    PinochleGameFragment mGFrag;
+    PinochleScoringFragment mSFrag;
     
     
     static final String TEAM1_SCORES = "team1Scores";
@@ -212,17 +212,17 @@ public class MainActivity extends FragmentActivity implements
 			Bundle args;
 			switch(position) {
 			case 0:
-				mHFrag = new HistoryFragment();
+				mHFrag = new PinochleHistoryFragment();
 				args = new Bundle();
 				mHFrag.setArguments(args);
 				return mHFrag;
 			case 1:
-				mGFrag = new GameFragment();
+				mGFrag = new PinochleGameFragment();
 				args = new Bundle();
 				mGFrag.setArguments(args);
 				return mGFrag;
 			case 2:
-				mSFrag = new ScoringFragment();
+				mSFrag = new PinochleScoringFragment();
 				args = new Bundle();
 				mSFrag.setArguments(args);
 				return mSFrag;
@@ -284,15 +284,14 @@ public class MainActivity extends FragmentActivity implements
         // update the main content by replacing fragments
 //        Fragment fragment = new PlanetFragment();
 //        Bundle args = new Bundle();
-//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
 //        fragment.setArguments(args);
 //
 //        FragmentManager fragmentManager = getFragmentManager();
 //        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 //
-//        // update selected item and title, then close the drawer
-//        mDrawerList.setItemChecked(position, true);
-//        setTitle(mPlanetTitles[position]);
+        // update selected item and title, then close the drawer
+        mDrawerList.setItemChecked(position, true);
+        setTitle(mGameTypeTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }    
     

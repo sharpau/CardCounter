@@ -1,4 +1,4 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

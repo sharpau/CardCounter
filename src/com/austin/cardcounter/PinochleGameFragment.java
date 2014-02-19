@@ -1,6 +1,6 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
-import com.austin.pinochletally.HistoryContract.HistoryEntry;
+import com.austin.cardcounter.HistoryContract.HistoryEntry;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -20,20 +20,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class GameFragment extends Fragment implements OnClickListener {
+public class PinochleGameFragment extends Fragment implements OnClickListener {
 		
 	Integer mTeam1Score = 0;
 	Integer mTeam2Score = 0;
 	int[] mSavedTeam1Scores;
 	int[] mSavedTeam2Scores;
 
-	public GameFragment() {
+	public PinochleGameFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_game,
+		View rootView = inflater.inflate(R.layout.fragment_pinochle_game,
 				container, false);
 		
 		// click listener
@@ -335,7 +335,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			// reference for super sketch fragment getting method:
 			// http://stackoverflow.com/questions/7379165/update-data-in-listfragment-as-part-of-viewpager/8886019#8886019			
 			// Add to the history fragment
-			HistoryFragment historyFrag = (HistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
 			historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
 			
 			errorToast("Team 1 wins! Game saved to History");
@@ -361,7 +361,7 @@ public class GameFragment extends Fragment implements OnClickListener {
 			         values);
 			
 			// Add to the history fragment
-			HistoryFragment historyFrag = (HistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
 			historyFrag.addGameEntry(name2val, name1val, Integer.toString(mTeam2Score), Integer.toString(mTeam1Score));
 			
 			errorToast("Team 2 wins! Game saved to History");

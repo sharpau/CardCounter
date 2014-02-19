@@ -1,6 +1,6 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
-import com.austin.pinochletally.HistoryContract.HistoryEntry;
+import com.austin.cardcounter.HistoryContract.HistoryEntry;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,12 +15,12 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-public class HistoryFragment extends Fragment implements OnClickListener {
+public class PinochleHistoryFragment extends Fragment implements OnClickListener {
 
 	int numRows = 1; // starts at 1 to account for header row
 	View rootView;
 
-	public HistoryFragment() {
+	public PinochleHistoryFragment() {
 	}
 	
 	public void addGameEntry(String winningTeam, String losingTeam, String winningScore, String losingScore) {
@@ -73,7 +73,7 @@ public class HistoryFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.fragment_history,
+		rootView = inflater.inflate(R.layout.fragment_pinochle_history,
 				container, false);
 		
 		// setup clear history button

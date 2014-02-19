@@ -1,4 +1,4 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
 import android.provider.BaseColumns;
 

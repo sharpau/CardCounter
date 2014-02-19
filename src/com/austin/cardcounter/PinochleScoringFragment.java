@@ -1,4 +1,4 @@
-package com.austin.pinochletally;
+package com.austin.cardcounter;
 
 import junit.framework.Assert;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.GridLayout.LayoutParams;
 
 
-public class ScoringFragment extends Fragment implements OnClickListener {
+public class PinochleScoringFragment extends Fragment implements OnClickListener {
 
-	public ScoringFragment() {
+	public PinochleScoringFragment() {
 	}
 	
 	static Boolean mSimpleScoring = true;
@@ -23,7 +23,7 @@ public class ScoringFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_scoring,
+		View rootView = inflater.inflate(R.layout.fragment_pinochle_scoring,
 				container, false);
 		
 		// click listener
