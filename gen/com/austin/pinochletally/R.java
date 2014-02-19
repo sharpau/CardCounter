@@ -78,13 +78,32 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
+        public static final int add_scores_btn=0x7f06000d;
         public static final int app_name=0x7f060000;
-        public static final int drawer_close=0x7f060007;
-        public static final int drawer_open=0x7f060006;
+        public static final int bidding_team_label=0x7f060017;
+        public static final int clear_btn=0x7f06000f;
+        public static final int clear_history_btn=0x7f060010;
+        public static final int current_bid_label=0x7f060011;
+        public static final int drawer_close=0x7f06001a;
+        public static final int drawer_open=0x7f060019;
+        public static final int lose_col=0x7f06000a;
+        public static final int meld_pts_label=0x7f060014;
+        public static final int minimum_meld=0x7f060007;
+        public static final int score_col=0x7f060008;
+        public static final int suit_hint=0x7f060018;
         public static final int switch_button=0x7f060005;
+        public static final int team1=0x7f06000b;
+        public static final int team2=0x7f06000c;
+        public static final int team_name_label=0x7f060012;
         public static final int title_section1=0x7f060002;
         public static final int title_section2=0x7f060003;
         public static final int title_section3=0x7f060004;
+        public static final int total_score_label=0x7f060013;
+        public static final int trick_pts_label=0x7f060015;
+        public static final int trump_suit_label=0x7f060016;
+        public static final int undo_btn=0x7f06000e;
+        public static final int win_col=0x7f060009;
+        public static final int zero=0x7f060006;
     }
     public static final class style {
         /** 

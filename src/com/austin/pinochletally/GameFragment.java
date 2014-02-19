@@ -2,7 +2,6 @@ package com.austin.pinochletally;
 
 import com.austin.pinochletally.HistoryContract.HistoryEntry;
 
-import android.R.color;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
