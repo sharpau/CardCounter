@@ -126,7 +126,8 @@ public class MainActivity extends FragmentActivity implements
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
-
+		
+		actionBar.removeAllTabs();
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mPinochlePagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
@@ -170,6 +171,7 @@ public class MainActivity extends FragmentActivity implements
 					}
 				});
 
+		actionBar.removeAllTabs();
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < m500PagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
@@ -180,7 +182,6 @@ public class MainActivity extends FragmentActivity implements
 					.setText(m500PagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		m500PagerAdapter.notifyDataSetChanged();
 		mViewPager.setCurrentItem(1);
 	}
 
@@ -231,16 +232,12 @@ public class MainActivity extends FragmentActivity implements
 			FragmentTransaction fragmentTransaction) {
 	}
 
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
 	public class PinochlePagerAdapter extends FragmentStatePagerAdapter {
 
 		public PinochlePagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
-
+		
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
@@ -299,7 +296,7 @@ public class MainActivity extends FragmentActivity implements
 		public FiveHundredPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
-
+		
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
