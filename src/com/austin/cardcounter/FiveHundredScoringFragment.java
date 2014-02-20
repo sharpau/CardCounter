@@ -1,16 +1,21 @@
 package com.austin.cardcounter;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 
-public class FiveHundredScoringFragment extends Fragment implements
-		OnClickListener {
-
+public class FiveHundredScoringFragment extends Fragment {
+	
+	
 	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_500_scoring,
+				container, false);
+		
+		return rootView;
 	}
 
 }

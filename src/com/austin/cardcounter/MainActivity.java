@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -26,30 +27,25 @@ import android.widget.TextView;
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager mViewPager;
 	
 	// Navigation drawer-related items
 	String[] mGameTypeTitles;
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    PinochleHistoryFragment mHFrag;
-    PinochleGameFragment mGFrag;
-    PinochleScoringFragment mSFrag;
     
+    ViewPager mViewPager;
+
+	PinochlePagerAdapter mPinochlePagerAdapter;
+	FiveHundredPagerAdapter m500PagerAdapter;
+    
+    int mGameType = 0;
+    PinochleHistoryFragment mPinochleHFrag;
+    PinochleGameFragment mPinochleGFrag;
+    PinochleScoringFragment mPinochleSFrag;
+    FiveHundredHistoryFragment m500HFrag;
+    FiveHundredGameFragment m500GFrag;
+    FiveHundredScoringFragment m500SFrag;
     
     static final String TEAM1_SCORES = "team1Scores";
     static final String TEAM2_SCORES = "team2Scores";
@@ -91,7 +87,7 @@ public class MainActivity extends FragmentActivity implements
                 R.string.drawer_close  /* "close drawer" description for accessibility */
                 ) {
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle("Game type here"); // TODO
+                getActionBar().setTitle(mGameTypeTitles[mGameType]); // TODO
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -104,15 +100,21 @@ public class MainActivity extends FragmentActivity implements
         
         // end nav drawer code ----------------------------------
 
+        setupPinochleTabs(savedInstanceState, actionBar);
+        //setup500Tabs(actionBar);
 
+	}
+	
+	private void setupPinochleTabs(Bundle savedInstanceState, final ActionBar actionBar) {
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
+        mPinochlePagerAdapter = new PinochlePagerAdapter(
 				getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setAdapter(null);
+		mViewPager.setAdapter(mPinochlePagerAdapter);
 
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -126,13 +128,13 @@ public class MainActivity extends FragmentActivity implements
 				});
 
 		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+		for (int i = 0; i < mPinochlePagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
 			// the adapter. Also specify this Activity object, which implements
 			// the TabListener interface, as the callback (listener) for when
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
+					.setText(mPinochlePagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
 		mViewPager.setCurrentItem(1);
@@ -144,7 +146,42 @@ public class MainActivity extends FragmentActivity implements
 		    mTeam1Scores = savedInstanceState.getIntArray(TEAM1_SCORES);
 		    mTeam2Scores = savedInstanceState.getIntArray(TEAM2_SCORES);
 	    }
+	}
+	
+	private void setup500Tabs(final ActionBar actionBar) {
+		// Create the adapter that will return a fragment for each of the three
+		// primary sections of the app.
+        m500PagerAdapter = new FiveHundredPagerAdapter(
+				getSupportFragmentManager());
 
+		// Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(null);
+		mViewPager.setAdapter(m500PagerAdapter);
+
+		// When swiping between different sections, select the corresponding
+		// tab. We can also use ActionBar.Tab#select() to do this if we have
+		// a reference to the Tab.
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
+
+		// For each of the sections in the app, add a tab to the action bar.
+		for (int i = 0; i < m500PagerAdapter.getCount(); i++) {
+			// Create a tab with text corresponding to the page title defined by
+			// the adapter. Also specify this Activity object, which implements
+			// the TabListener interface, as the callback (listener) for when
+			// this tab is selected.
+			actionBar.addTab(actionBar.newTab()
+					.setText(m500PagerAdapter.getPageTitle(i))
+					.setTabListener(this));
+		}
+		m500PagerAdapter.notifyDataSetChanged();
+		mViewPager.setCurrentItem(1);
 	}
 
 	// Override to save scores already entered
@@ -168,7 +205,6 @@ public class MainActivity extends FragmentActivity implements
 	    // Always call the superclass so it can save the view hierarchy state
 	    super.onSaveInstanceState(savedInstanceState);
 	}
-
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -199,9 +235,9 @@ public class MainActivity extends FragmentActivity implements
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	public class PinochlePagerAdapter extends FragmentStatePagerAdapter {
 
-		public SectionsPagerAdapter(FragmentManager fm) {
+		public PinochlePagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
@@ -212,20 +248,79 @@ public class MainActivity extends FragmentActivity implements
 			Bundle args;
 			switch(position) {
 			case 0:
-				mHFrag = new PinochleHistoryFragment();
+				mPinochleHFrag = new PinochleHistoryFragment();
 				args = new Bundle();
-				mHFrag.setArguments(args);
-				return mHFrag;
+				mPinochleHFrag.setArguments(args);
+				return mPinochleHFrag;
 			case 1:
-				mGFrag = new PinochleGameFragment();
+				mPinochleGFrag = new PinochleGameFragment();
 				args = new Bundle();
-				mGFrag.setArguments(args);
-				return mGFrag;
+				mPinochleGFrag.setArguments(args);
+				return mPinochleGFrag;
 			case 2:
-				mSFrag = new PinochleScoringFragment();
+				mPinochleSFrag = new PinochleScoringFragment();
 				args = new Bundle();
-				mSFrag.setArguments(args);
-				return mSFrag;
+				mPinochleSFrag.setArguments(args);
+				return mPinochleSFrag;
+			default:
+				// Return a DummySectionFragment (defined as a static inner class
+				// below) with the page number as its lone argument.
+				fragment = new DummySectionFragment();
+				args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				return fragment;
+			}
+		}
+
+		@Override
+		public int getCount() {
+			// Show 3 total pages.
+			return 3;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			Locale l = Locale.getDefault();
+			switch (position) {
+			case 0:
+				return getString(R.string.title_section1).toUpperCase(l);
+			case 1:
+				return getString(R.string.title_section2).toUpperCase(l);
+			case 2:
+				return getString(R.string.title_section3).toUpperCase(l);
+			}
+			return null;
+		}
+	}
+	
+	public class FiveHundredPagerAdapter extends FragmentStatePagerAdapter {
+
+		public FiveHundredPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			// getItem is called to instantiate the fragment for the given page.
+			Fragment fragment;
+			Bundle args;
+			switch(position) {
+			case 0:
+				m500HFrag = new FiveHundredHistoryFragment();
+				args = new Bundle();
+				m500HFrag.setArguments(args);
+				return m500HFrag;
+			case 1:
+				m500GFrag = new FiveHundredGameFragment();
+				args = new Bundle();
+				m500GFrag.setArguments(args);
+				return m500GFrag;
+			case 2:
+				m500SFrag = new FiveHundredScoringFragment();
+				args = new Bundle();
+				m500SFrag.setArguments(args);
+				return m500SFrag;
 			default:
 				// Return a DummySectionFragment (defined as a static inner class
 				// below) with the page number as its lone argument.
@@ -290,10 +385,24 @@ public class MainActivity extends FragmentActivity implements
 //        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 //
         // update selected item and title, then close the drawer
+    	int old = mGameType;
+    	mGameType = position;
+    	if(old != mGameType) {
+    		// only do stuff if something different was selected
+    		//mViewPager.not
+        	switch(mGameType) {
+        	case 0:
+        	default:
+        		setupPinochleTabs(null, getActionBar());
+        		break;
+        	case 1:
+        		setup500Tabs(getActionBar());
+        		break;
+        	}
+    	}
         mDrawerList.setItemChecked(position, true);
-        setTitle(mGameTypeTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
-    }    
+    }
     
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
