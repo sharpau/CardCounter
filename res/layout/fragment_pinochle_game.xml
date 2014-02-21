@@ -261,7 +261,7 @@
 		   	    android:layout_column="1"
 		   	    android:nextFocusDown="@id/trump"
 		   	    android:hint="@string/minimum_meld" />
-		    <EditText
+		    <!-- EditText
 		        android:id="@id/trump"
 		   	    android:layout_width="wrap_content"
 		   	    android:layout_height="wrap_content"
@@ -269,7 +269,11 @@
 		   	    android:layout_column="1"
 		   	    android:singleLine="true"
 		   	    android:imeOptions="actionDone"
-		   	    android:hint="@string/suit_hint" />
+		   	    android:hint="@string/suit_hint" /> -->
+			<Spinner
+			    android:id="@+id/trump_spinner"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" />
 			<ToggleButton 
 			    android:id="@+id/bidding_team"
 			    android:layout_width="wrap_content"

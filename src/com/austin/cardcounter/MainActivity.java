@@ -47,8 +47,8 @@ public class MainActivity extends FragmentActivity implements
     FiveHundredGameFragment m500GFrag;
     FiveHundredScoringFragment m500SFrag;
     
-    static final String TEAM1_SCORES = "team1Scores";
-    static final String TEAM2_SCORES = "team2Scores";
+    static final String PINOCHLE_TEAM1_SCORES = "team1Scores";
+    static final String PINOCHLE_TEAM2_SCORES = "team2Scores";
     public int[] mTeam1Scores;
     public int[] mTeam2Scores;
 
@@ -144,8 +144,8 @@ public class MainActivity extends FragmentActivity implements
 		if (savedInstanceState != null) {
 	        // Restore value of members from saved state
 			// Restore state members from saved instance
-		    mTeam1Scores = savedInstanceState.getIntArray(TEAM1_SCORES);
-		    mTeam2Scores = savedInstanceState.getIntArray(TEAM2_SCORES);
+		    mTeam1Scores = savedInstanceState.getIntArray(PINOCHLE_TEAM1_SCORES);
+		    mTeam2Scores = savedInstanceState.getIntArray(PINOCHLE_TEAM2_SCORES);
 	    }
 	}
 	
@@ -193,14 +193,14 @@ public class MainActivity extends FragmentActivity implements
 		for(int i = 0; i < scrollArea1.getChildCount(); i++) {
 			team1Scores[i] = Integer.parseInt(((TextView)scrollArea1.getChildAt(i)).getText().toString());
 		}
-		savedInstanceState.putIntArray(TEAM1_SCORES, team1Scores);
+		savedInstanceState.putIntArray(PINOCHLE_TEAM1_SCORES, team1Scores);
 		
 		LinearLayout scrollArea2 = (LinearLayout)findViewById(R.id.team2_list);
 		int[] team2Scores = new int[scrollArea2.getChildCount()];
 		for(int i = 0; i < scrollArea2.getChildCount(); i++) {
 			team2Scores[i] = Integer.parseInt(((TextView)scrollArea2.getChildAt(i)).getText().toString());
 		}
-		savedInstanceState.putIntArray(TEAM2_SCORES, team2Scores);
+		savedInstanceState.putIntArray(PINOCHLE_TEAM2_SCORES, team2Scores);
 		
 		
 	    // Always call the superclass so it can save the view hierarchy state

@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -59,9 +62,42 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			}
         });
         
+        // trump suit spinner setup
+		String[] strings = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        Spinner mySpinner = (Spinner) rootView.findViewById(R.id.trump_spinner);
+        mySpinner.setAdapter(new ImgAdapter(getActivity(), R.layout.row, strings));
+        
         
 		return rootView;
 	}
+	
+	public class ImgAdapter extends ArrayAdapter<String> {
+		
+		int arr_images[] = {R.drawable.hearts, R.drawable.diamonds, R.drawable.clubs, R.drawable.spades};
+		 
+        public ImgAdapter(Context context, int textViewResourceId, String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+ 
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+        	Bundle arg = new Bundle();
+            LayoutInflater inflater = getLayoutInflater(arg);
+            View row = inflater.inflate(R.layout.row, parent, false); 
+            ImageView icon = (ImageView) row.findViewById(R.id.icon);
+            icon.setImageResource(arr_images[position]);
+            return row;
+            }
+        }
 	
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
