@@ -1,6 +1,6 @@
 package com.austin.cardcounter;
 
-import com.austin.cardcounter.PinochleHistoryContract.HistoryEntry;
+import com.austin.cardcounter.PinochleHistoryFragment;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -356,22 +356,22 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			
 			// Create a new map of values, where column names are the keys
 			ContentValues values = new ContentValues();
-			values.put(HistoryEntry.COLUMN_NAME_WINNING_TEAM, name1val);
-			values.put(HistoryEntry.COLUMN_NAME_WINNING_SCORE, mTeam1Score);
-			values.put(HistoryEntry.COLUMN_NAME_LOSING_TEAM, name2val);
-			values.put(HistoryEntry.COLUMN_NAME_LOSING_SCORE, mTeam2Score);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_TEAM, name1val);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam1Score);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_TEAM, name2val);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam2Score);
 			
 			// Insert the new row, returning the primary key value of the new row
 			long newRowId;
 			newRowId = db.insert(
-			         HistoryEntry.TABLE_NAME,
-			         null,
-			         values);
+					PinochleHistoryFragment.TABLE_NAME,
+			        null,
+			        values);
 			
 			// reference for super sketch fragment getting method:
 			// http://stackoverflow.com/questions/7379165/update-data-in-listfragment-as-part-of-viewpager/8886019#8886019			
 			// Add to the history fragment
-			//PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			//PinochlePinochleHistoryFragment historyFrag = (PinochlePinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
 			//historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
 			
 			errorToast("Team 1 wins! Game saved to History");
@@ -384,21 +384,21 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			
 			// Create a new map of values, where column names are the keys
 			ContentValues values = new ContentValues();
-			values.put(HistoryEntry.COLUMN_NAME_WINNING_TEAM, name2val);
-			values.put(HistoryEntry.COLUMN_NAME_WINNING_SCORE, mTeam2Score);
-			values.put(HistoryEntry.COLUMN_NAME_LOSING_TEAM, name1val);
-			values.put(HistoryEntry.COLUMN_NAME_LOSING_SCORE, mTeam1Score);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_TEAM, name2val);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam2Score);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_TEAM, name1val);
+			values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam1Score);
 			
 			// Insert the new row, returning the primary key value of the new row
 			long newRowId;
 			newRowId = db.insert(
-			         HistoryEntry.TABLE_NAME,
+			         PinochleHistoryFragment.TABLE_NAME,
 			         null,
 			         values);
 			
 			// Add to the history fragment
-			PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
-			historyFrag.addGameEntry(name2val, name1val, Integer.toString(mTeam2Score), Integer.toString(mTeam1Score));
+			//PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			//historyFrag.addGameEntry(name2val, name1val, Integer.toString(mTeam2Score), Integer.toString(mTeam1Score));
 			
 			errorToast("Team 2 wins! Game saved to History");
 		}

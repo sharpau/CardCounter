@@ -39,7 +39,7 @@ public final class R {
         public static final int spades=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f050021;
+        public static final int action_settings=0x7f050020;
         public static final int add_scores=0x7f050014;
         public static final int bid=0x7f050006;
         public static final int bidding_team=0x7f050018;
@@ -49,17 +49,16 @@ public final class R {
         public static final int five_hundred_history_grid=0x7f05000b;
         public static final int five_hundred_scoring=0x7f05000d;
         public static final int fragment_game=0x7f05000f;
-        public static final int fragment_scoring=0x7f05001b;
-        public static final int fragment_scoring_melds=0x7f05001c;
-        public static final int fragment_scoring_tricks=0x7f05001f;
-        public static final int fragment_scoring_tricks_simple=0x7f05001e;
-        public static final int icon=0x7f050020;
+        public static final int fragment_scoring=0x7f05001a;
+        public static final int fragment_scoring_melds=0x7f05001b;
+        public static final int fragment_scoring_tricks=0x7f05001e;
+        public static final int fragment_scoring_tricks_simple=0x7f05001d;
+        public static final int icon=0x7f05001f;
         public static final int left_drawer=0x7f05000a;
         public static final int pager=0x7f050009;
-        public static final int pinochle_clear_history=0x7f05001a;
         public static final int pinochle_history_grid=0x7f050019;
         public static final int section_label=0x7f05000e;
-        public static final int switch_scoring_button=0x7f05001d;
+        public static final int switch_scoring_button=0x7f05001c;
         public static final int team1_list=0x7f050010;
         public static final int team1_meld=0x7f050001;
         public static final int team1_score=0x7f050011;

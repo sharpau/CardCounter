@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class HistoryDbHelper extends SQLiteOpenHelper {
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 4;
 	public static final String DATABASE_NAME = "History.db";
 	
 	public HistoryDbHelper(Context context) {
@@ -14,9 +14,12 @@ public class HistoryDbHelper extends SQLiteOpenHelper {
 	}
 	
 	public void onCreate(SQLiteDatabase db) {
-        db.execSQL(PinochleHistoryContract.HistoryEntry.SQL_CREATE_ENTRIES);
+        db.execSQL(PinochleHistoryFragment.SqlCreateEntries(PinochleHistoryFragment.TABLE_NAME));
+        db.execSQL(FiveHundredHistoryFragment.SqlCreateEntries(FiveHundredHistoryFragment.TABLE_NAME));
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    	db.execSQL("DROP TABLE IF EXISTS " + PinochleHistoryFragment.TABLE_NAME);
+    	db.execSQL("DROP TABLE IF EXISTS " + FiveHundredHistoryFragment.TABLE_NAME);
         onCreate(db);
     }
 
