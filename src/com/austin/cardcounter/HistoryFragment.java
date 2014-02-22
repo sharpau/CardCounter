@@ -39,6 +39,7 @@ public abstract class HistoryFragment extends Fragment implements OnClickListene
 	int numRows = 1;
 	View rootView;
 	int mGridID;
+	String mTableName;
 	
 
 	public HistoryFragment() {
@@ -96,10 +97,11 @@ public abstract class HistoryFragment extends Fragment implements OnClickListene
 	@Override
 	public abstract View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 	
-	public View onCreateViewHelper(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, int layout, int gridID) {
+	public View onCreateViewHelper(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, int layout, int gridID, String table) {
 		rootView = inflater.inflate(layout,
 				container, false);
 		mGridID = gridID;
+		mTableName = table;
 		
 		// setup clear history button
 	    Button clearBtn = (Button) rootView.findViewById(R.id.clear_history);
@@ -119,7 +121,7 @@ public abstract class HistoryFragment extends Fragment implements OnClickListene
 		String sortOrder = _ID + " ASC";
 	
 	    Cursor cursor = db.query(
-			TABLE_NAME,  // The table to query
+    		mTableName,  // The table to query
 	        projection,                               // The columns to return
 	        null,                                // The columns for the WHERE clause
 	        null,                            // The values for the WHERE clause
@@ -151,7 +153,7 @@ public abstract class HistoryFragment extends Fragment implements OnClickListene
 			HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
 			SQLiteDatabase db = mDbHelper.getReadableDatabase();
 			String[] empty = null;
-			db.delete(TABLE_NAME, "", empty);
+			db.delete(mTableName, "", empty);
 			
 	
 			GridLayout historyGrid = (GridLayout)rootView.findViewById(mGridID);

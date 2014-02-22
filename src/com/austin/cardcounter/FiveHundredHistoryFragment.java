@@ -14,6 +14,6 @@ public class FiveHundredHistoryFragment extends HistoryFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return onCreateViewHelper(inflater, container, savedInstanceState, R.layout.fragment_500_history, R.id.five_hundred_history_grid);
+		return onCreateViewHelper(inflater, container, savedInstanceState, R.layout.fragment_500_history, R.id.five_hundred_history_grid, TABLE_NAME);
 	}
 }
