@@ -1,6 +1,6 @@
 package com.austin.cardcounter;
 
-import com.austin.cardcounter.HistoryContract.HistoryEntry;
+import com.austin.cardcounter.PinochleHistoryContract.HistoryEntry;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -371,8 +371,8 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			// reference for super sketch fragment getting method:
 			// http://stackoverflow.com/questions/7379165/update-data-in-listfragment-as-part-of-viewpager/8886019#8886019			
 			// Add to the history fragment
-			PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
-			historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
+			//PinochleHistoryFragment historyFrag = (PinochleHistoryFragment)getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+			//historyFrag.addGameEntry(name1val, name2val, Integer.toString(mTeam1Score), Integer.toString(mTeam2Score));
 			
 			errorToast("Team 1 wins! Game saved to History");
 		}

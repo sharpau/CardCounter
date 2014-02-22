@@ -2,12 +2,12 @@ package com.austin.cardcounter;
 
 import android.provider.BaseColumns;
 
-public final class HistoryContract {
-	public HistoryContract() {}
+public final class PinochleHistoryContract {
+	public PinochleHistoryContract() {}
 	
 	// defines columns of sql table
 	public static abstract class HistoryEntry implements BaseColumns {
-		public static final String TABLE_NAME = "history";
+		public static final String TABLE_NAME = "pinochleHistory";
 		public static final String COLUMN_NAME_WINNING_TEAM = "winningteam";
 		public static final String COLUMN_NAME_WINNING_SCORE = "winningscore";
 		public static final String COLUMN_NAME_LOSING_TEAM = "losingteam";

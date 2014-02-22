@@ -1,6 +1,6 @@
 package com.austin.cardcounter;
 
-import com.austin.cardcounter.HistoryContract.HistoryEntry;
+import com.austin.cardcounter.PinochleHistoryContract.HistoryEntry;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,7 +24,7 @@ public class PinochleHistoryFragment extends Fragment implements OnClickListener
 	}
 	
 	public void addGameEntry(String winningTeam, String losingTeam, String winningScore, String losingScore) {
-		GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
+		GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.pinochle_history_grid);
 	    // set up the grid with the list of games in history
 		historyGrid.setRowCount(numRows + 1);
 		
@@ -77,7 +77,7 @@ public class PinochleHistoryFragment extends Fragment implements OnClickListener
 				container, false);
 		
 		// setup clear history button
-        Button clearBtn = (Button) rootView.findViewById(R.id.clear_history);
+        Button clearBtn = (Button) rootView.findViewById(R.id.pinochle_clear_history);
         clearBtn.setOnClickListener(this);
 		
 		// populate with list of past games
@@ -129,7 +129,7 @@ public class PinochleHistoryFragment extends Fragment implements OnClickListener
 			db.delete(HistoryEntry.TABLE_NAME, "", empty);
 			
 
-			GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.history_grid);
+			GridLayout historyGrid = (GridLayout)rootView.findViewById(R.id.pinochle_history_grid);
 			historyGrid.removeAllViews();
 			numRows = 1;
 			addGameEntry("Winning Team", "Losing Team", "Score", "Score");

@@ -11,7 +11,7 @@
 	    android:orientation="vertical">
     
 	    <GridLayout
-	        android:id="@+id/history_grid"
+	        android:id="@+id/pinochle_history_grid"
 	 	    android:layout_width="match_parent"
 	 	    android:layout_height="wrap_content"
 		    
@@ -49,11 +49,11 @@
 		</GridLayout>
 		
 	    <Button
-			android:id="@+id/clear_history"
+			android:id="@+id/pinochle_clear_history"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
-			android:onClick="clearHistory"
+			android:onClick="pinochleClearHistory"
 			android:text="@string/clear_history_btn"
 			/>
     </LinearLayout>
