@@ -236,11 +236,11 @@ public class MainActivity extends FragmentActivity implements
 	public ImgAdapter getSuitImagesAdapter(Boolean noTrump) {
 		// trump suit spinner setup
 		if(noTrump) {
-			String[] strings = {"Hearts", "Diamonds", "Clubs", "Spades", "No Trump"};
+			String[] strings = {"Spades", "Clubs", "Diamonds", "Hearts", "No Trump"};
 			return new ImgAdapter(this, R.layout.row, strings);
 		}
 		else {
-			String[] strings = {"Hearts", "Diamonds", "Clubs", "Spades"};
+			String[] strings = {"Spades", "Clubs", "Diamonds", "Hearts"};
 			return new ImgAdapter(this, R.layout.row, strings);
 		}
 	}
@@ -248,7 +248,7 @@ public class MainActivity extends FragmentActivity implements
 	// for trump suit spinner
 	public class ImgAdapter extends ArrayAdapter<String> {
 		
-		int arr_images[] = {R.drawable.hearts, R.drawable.diamonds, R.drawable.clubs, R.drawable.spades, R.drawable.notrump};
+		int arr_images[] = {R.drawable.spades, R.drawable.clubs, R.drawable.diamonds, R.drawable.hearts, R.drawable.notrump};
 		 
         public ImgAdapter(Context context, int textViewResourceId, String[] objects) {
             super(context, textViewResourceId, objects);

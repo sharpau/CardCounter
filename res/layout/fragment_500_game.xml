@@ -198,7 +198,7 @@
 	        android:alignmentMode="alignBounds"
 	        android:columnOrderPreserved="false"
 	
-	        android:columnCount="2"
+	        android:columnCount="3"
 	        android:rowCount="3" >
 	 	
 		 	<TextView
@@ -229,11 +229,13 @@
 		   	    android:layout_row="0"
 		   	    android:layout_column="1"
 		   	    android:nextFocusDown="@id/trump"
-		   	    android:hint="@string/minimum_meld" />
+		   	    android:hint="@string/minimum_tricks" />
 			<Spinner
 			    android:id="@+id/trump_spinner"
 			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content" />
+			    android:layout_height="wrap_content"
+		   	    android:layout_row="1"
+		   	    android:layout_column="1" />
 			<ToggleButton 
 			    android:id="@+id/bidding_team"
 			    android:layout_width="wrap_content"
@@ -242,6 +244,28 @@
 		   	    android:layout_column="1"
 			    android:textOn="Team 1"
 			    android:textOff="Team 2" />
+			
+			<!-- radiobutton for measle / double / not -->
+			<RadioGroup
+			    android:layout_row="0"
+			    android:layout_rowSpan="3"
+			    android:layout_column="2"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical">
+			    <RadioButton android:id="@+id/normal"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Normal Bid"/>
+			    <RadioButton android:id="@+id/measle"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Measle"/>
+			    <RadioButton android:id="@+id/double_measle"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Double Measle"/>
+			</RadioGroup>
 			
 		 	</GridLayout>
 	 	

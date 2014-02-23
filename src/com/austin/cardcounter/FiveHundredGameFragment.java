@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -148,13 +149,26 @@ public class FiveHundredGameFragment extends Fragment implements
 			}
 			int trick2val = Integer.parseInt(trick2.getText().toString());
 
+			RadioButton measleBtn = (RadioButton)getActivity().findViewById(R.id.measle);
+			Boolean measle = measleBtn.isChecked();
+			RadioButton doubleMeasleBtn = (RadioButton)getActivity().findViewById(R.id.double_measle);
+			Boolean doubleMeasle = doubleMeasleBtn.isChecked();
+
 			EditText bid = (EditText)getActivity().findViewById(R.id.bid);
-			if(bid.getText().length() < 1) {
+			if(bid.getText().length() < 1 && !measle && !doubleMeasle) {
 				// error
 				errorToast("Invalid bid amount");
 				return;
 			}
-			int bidval = Integer.parseInt(bid.getText().toString());
+			int bidval = 0;
+			if(!measle && !doubleMeasle) {
+				bidval = Integer.parseInt(bid.getText().toString());
+				if(bidval < 6) {
+					// error
+					errorToast("Bid value below 6");
+					return;
+				}
+			}
 			
 			ToggleButton team = (ToggleButton)getActivity().findViewById(R.id.bidding_team);
 			Boolean team1 = team.isChecked();
@@ -168,11 +182,6 @@ public class FiveHundredGameFragment extends Fragment implements
 				errorToast("Tricks taken do not add to 10");
 				return;
 			}
-			if(bidval < 6) {
-				// error
-				errorToast("Bid value below 6");
-				return;
-			}
 			
 			if(team1) {
 				// 500 points logic for team 1
@@ -183,13 +192,99 @@ public class FiveHundredGameFragment extends Fragment implements
 				 * if double measle
 				 * 		took 0 = 500, 0
 				 * 		otherwise = -500, 10*trick1val
+				 * otherwise
+				 * 		if taken > bid
+				 * 			team 1 pts = (bidval - 6) * 100 + (2 + suit) * 40
+				 * 			if taken == 10 & team 1 pts < 250, team 1 pts = 250
+				 * 			team2 = 10 * tricks
+				 * 		otherwise
+				 * 			team 1 pts = -bid
+				 * 			team 2 = 10 * tricks
+				 * 
 				 */
-				if(bidval > trick1val) {
-					// team 1 pts = (bidval - 6) * 100 + (2 + suit) * 40
+				if(measle) {
+					if(trick1val == 0) {
+						addTeam1Score(250);
+						addTeam2Score(0);
+					}
+					else {
+						addTeam1Score(-250);
+						addTeam2Score(10 * trick1val);
+					}
+				}
+				else if(doubleMeasle) {
+					if(trick1val == 0) {
+						addTeam1Score(500);
+						addTeam2Score(0);
+					}
+					else {
+						addTeam1Score(-500);
+						addTeam2Score(10 * trick1val);
+					}					
+				}
+				else {
+					if(trick1val >= bidval) {
+						int points = (bidval - 6) * 100 + (2 + suit) * 20;
+						if(trick1val == 10 && points < 250) {
+							points = 250;
+						}
+						addTeam1Score(points);
+						addTeam2Score(10 * trick2val);
+					}
+					else {
+						int points = (bidval - 6) * 100 + (2 + suit) * 20;
+						addTeam1Score(-1 * points);
+						if(trick2val == 10) {
+							addTeam2Score(250);
+						}
+						else {
+							addTeam2Score(10 * trick1val);
+						}
+					}
 				}
 			}
 			else {
 				// points logic for team 2 bidding
+				if(measle) {
+					if(trick2val == 0) {
+						addTeam2Score(250);
+						addTeam1Score(0);
+					}
+					else {
+						addTeam2Score(-250);
+						addTeam1Score(10 * trick2val);
+					}
+				}
+				else if(doubleMeasle) {
+					if(trick2val == 0) {
+						addTeam2Score(500);
+						addTeam1Score(0);
+					}
+					else {
+						addTeam2Score(-500);
+						addTeam1Score(10 * trick2val);
+					}					
+				}
+				else {
+					if(trick2val >= bidval) {
+						int points = (bidval - 6) * 100 + (2 + suit) * 20;
+						if(trick2val == 10 && points < 250) {
+							points = 250;
+						}
+						addTeam2Score(points);
+						addTeam1Score(10 * trick1val);
+					}
+					else {
+						int points = (bidval - 6) * 100 + (2 + suit) * 20;
+						addTeam2Score(-1 * points);
+						if(trick1val == 10) {
+							addTeam1Score(250);
+						}
+						else {
+							addTeam1Score(10 * trick1val);
+						}
+					}
+				}
 			}
 
 			
@@ -199,7 +294,7 @@ public class FiveHundredGameFragment extends Fragment implements
 			bid.setText("");
 			
 			// check if game has ended
-			if(mTeam1Score > 500 && mTeam1Score > mTeam2Score) {
+			if(mTeam1Score >= 500 && mTeam1Score > mTeam2Score) {
 				// go out, biggest
 				
 				HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
@@ -207,21 +302,21 @@ public class FiveHundredGameFragment extends Fragment implements
 				
 				// Create a new map of values, where column names are the keys
 				ContentValues values = new ContentValues();
-				values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_TEAM, name1val);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam1Score);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_TEAM, name2val);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam2Score);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_WINNING_TEAM, name1val);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam1Score);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_LOSING_TEAM, name2val);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam2Score);
 				
 				// Insert the new row, returning the primary key value of the new row
 				long newRowId;
 				newRowId = db.insert(
-						PinochleHistoryFragment.TABLE_NAME,
+						FiveHundredHistoryFragment.TABLE_NAME,
 				        null,
 				        values);
 				
 				errorToast("Team 1 wins! Game saved to History");
 			}
-			else if(mTeam2Score > 500) {
+			else if(mTeam2Score >= 500) {
 				// other team didn't win, and we went out, so we win
 				
 				HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
@@ -229,15 +324,15 @@ public class FiveHundredGameFragment extends Fragment implements
 				
 				// Create a new map of values, where column names are the keys
 				ContentValues values = new ContentValues();
-				values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_TEAM, name2val);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam2Score);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_TEAM, name1val);
-				values.put(PinochleHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam1Score);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_WINNING_TEAM, name2val);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_WINNING_SCORE, mTeam2Score);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_LOSING_TEAM, name1val);
+				values.put(FiveHundredHistoryFragment.COLUMN_NAME_LOSING_SCORE, mTeam1Score);
 				
 				// Insert the new row, returning the primary key value of the new row
 				long newRowId;
 				newRowId = db.insert(
-				         PinochleHistoryFragment.TABLE_NAME,
+						 FiveHundredHistoryFragment.TABLE_NAME,
 				         null,
 				         values);
 				

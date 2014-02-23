@@ -315,7 +315,7 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 		bid.setText("");
 		
 		// check if game has ended
-		if((team1 && mTeam1Score > 1500) || (mTeam1Score > 1500 && mTeam2Score < 1500)) {
+		if((team1 && mTeam1Score >= 1500) || (mTeam1Score >= 1500 && mTeam2Score < 1500)) {
 			// bid and go out, or don't bid and go out when the other team doesn't
 			
 			HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
@@ -343,7 +343,7 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			
 			errorToast("Team 1 wins! Game saved to History");
 		}
-		else if(mTeam2Score > 1500) {
+		else if(mTeam2Score >= 1500) {
 			// other team didn't win, and we went out, so we win
 			
 			HistoryDbHelper mDbHelper = new HistoryDbHelper(getActivity());
