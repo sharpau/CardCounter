@@ -21,7 +21,7 @@
 			    android:layout_margin="5dp"
 			    android:useDefaultMargins="true"
 			    android:columnCount="2"
-			    android:id="@+id/five_hundred_scoring" >
+			    android:id="@+id/five_hundred_scoring_special" >
 		 	
 			 	<TextView 
 			        android:text="Measle"

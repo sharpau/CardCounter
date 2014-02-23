@@ -3,6 +3,7 @@ package com.austin.cardcounter;
 import java.util.Locale;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -230,6 +232,47 @@ public class MainActivity extends FragmentActivity implements
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
+	
+	public ImgAdapter getSuitImagesAdapter(Boolean noTrump) {
+		// trump suit spinner setup
+		if(noTrump) {
+			String[] strings = {"Hearts", "Diamonds", "Clubs", "Spades", "No Trump"};
+			return new ImgAdapter(this, R.layout.row, strings);
+		}
+		else {
+			String[] strings = {"Hearts", "Diamonds", "Clubs", "Spades"};
+			return new ImgAdapter(this, R.layout.row, strings);
+		}
+	}
+	
+	// for trump suit spinner
+	public class ImgAdapter extends ArrayAdapter<String> {
+		
+		int arr_images[] = {R.drawable.hearts, R.drawable.diamonds, R.drawable.clubs, R.drawable.spades, R.drawable.notrump};
+		 
+        public ImgAdapter(Context context, int textViewResourceId, String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+ 
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+ 
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+        	Bundle arg = new Bundle();
+            LayoutInflater inflater = getLayoutInflater();
+            View row = inflater.inflate(R.layout.row, parent, false); 
+            ImageView icon = (ImageView) row.findViewById(R.id.icon);
+            icon.setImageResource(arr_images[position]);
+            return row;
+            }
+        }
 
 	public class PinochlePagerAdapter extends FragmentStatePagerAdapter {
 

@@ -23,6 +23,7 @@
     <string name="total_score_label">Total Score</string>
     <string name="meld_pts_label">Meld Points</string>
     <string name="trick_pts_label">Trick Points</string>
+    <string name="trick_num_label">Tricks Taken</string>
     <string name="trump_suit_label">Trump Suit</string>
     <string name="bidding_team_label">Bidding Team</string>
     <string name="suit_hint">Hearts</string>
