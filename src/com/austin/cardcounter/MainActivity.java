@@ -39,6 +39,7 @@ public class MainActivity extends FragmentActivity implements
 
 	PinochlePagerAdapter mPinochlePagerAdapter;
 	FiveHundredPagerAdapter m500PagerAdapter;
+	GenericPagerAdapter mGenericPagerAdapter;
     
     int mGameType = 0;
     PinochleHistoryFragment mPinochleHFrag;
@@ -47,6 +48,9 @@ public class MainActivity extends FragmentActivity implements
     FiveHundredHistoryFragment m500HFrag;
     FiveHundredGameFragment m500GFrag;
     FiveHundredScoringFragment m500SFrag;
+    GenericHistoryFragment mGHFrag;
+    GenericGameFragment mGGFrag;
+    GenericScoringFragment mGSFrag;
     
     static final String PINOCHLE_TEAM1_SCORES = "team1Scores";
     static final String PINOCHLE_TEAM2_SCORES = "team2Scores";
@@ -181,6 +185,42 @@ public class MainActivity extends FragmentActivity implements
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
 					.setText(m500PagerAdapter.getPageTitle(i))
+					.setTabListener(this));
+		}
+		mViewPager.setCurrentItem(1);
+	}
+	
+	private void setupGenericTabs(final ActionBar actionBar) {
+		// Create the adapter that will return a fragment for each of the three
+		// primary sections of the app.
+        mGenericPagerAdapter = new GenericPagerAdapter(
+				getSupportFragmentManager());
+
+		// Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(null);
+		mViewPager.setAdapter(mGenericPagerAdapter);
+
+		// When swiping between different sections, select the corresponding
+		// tab. We can also use ActionBar.Tab#select() to do this if we have
+		// a reference to the Tab.
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
+
+		actionBar.removeAllTabs();
+		// For each of the sections in the app, add a tab to the action bar.
+		for (int i = 0; i < mGenericPagerAdapter.getCount(); i++) {
+			// Create a tab with text corresponding to the page title defined by
+			// the adapter. Also specify this Activity object, which implements
+			// the TabListener interface, as the callback (listener) for when
+			// this tab is selected.
+			actionBar.addTab(actionBar.newTab()
+					.setText(mGenericPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
 		mViewPager.setCurrentItem(1);
@@ -391,6 +431,65 @@ public class MainActivity extends FragmentActivity implements
 			return null;
 		}
 	}
+
+	public class GenericPagerAdapter extends FragmentStatePagerAdapter {
+
+		public GenericPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+		
+		@Override
+		public Fragment getItem(int position) {
+			// getItem is called to instantiate the fragment for the given page.
+			Fragment fragment;
+			Bundle args;
+			switch(position) {
+			case 0:
+				mGHFrag = new GenericHistoryFragment();
+				args = new Bundle();
+				mGHFrag.setArguments(args);
+				return mGHFrag;
+			case 1:
+				mGGFrag = new GenericGameFragment();
+				args = new Bundle();
+				mGGFrag.setArguments(args);
+				return mGGFrag;
+			case 2:
+				mGSFrag = new GenericScoringFragment();
+				args = new Bundle();
+				mGSFrag.setArguments(args);
+				return mGSFrag;
+			default:
+				// Return a DummySectionFragment (defined as a static inner class
+				// below) with the page number as its lone argument.
+				fragment = new DummySectionFragment();
+				args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				return fragment;
+			}
+		}
+
+		@Override
+		public int getCount() {
+			// Show 3 total pages.
+			return 3;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			Locale l = Locale.getDefault();
+			switch (position) {
+			case 0:
+				return getString(R.string.title_section1).toUpperCase(l);
+			case 1:
+				return getString(R.string.title_section2).toUpperCase(l);
+			case 2:
+				return getString(R.string.title_section3).toUpperCase(l);
+			}
+			return null;
+		}
+	}
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -437,7 +536,10 @@ public class MainActivity extends FragmentActivity implements
         	case 1:
         		setup500Tabs(getActionBar());
         		break;
-        	}
+	    	case 2:
+	    		setupGenericTabs(getActionBar());
+	    		break;
+	    	}
     	}
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);

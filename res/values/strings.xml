@@ -33,8 +33,7 @@
     <string-array name="game_types">
         <item>Pinochle</item>
         <item>500</item>
-        <item>Canasta</item>
-        <item>Casino</item>
+        <item>Generic</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

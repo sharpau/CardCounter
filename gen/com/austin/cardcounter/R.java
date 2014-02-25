@@ -84,11 +84,14 @@ public final class R {
         public static final int fragment_500_game=0x7f030002;
         public static final int fragment_500_history=0x7f030003;
         public static final int fragment_500_scoring=0x7f030004;
-        public static final int fragment_main_dummy=0x7f030005;
-        public static final int fragment_pinochle_game=0x7f030006;
-        public static final int fragment_pinochle_history=0x7f030007;
-        public static final int fragment_pinochle_scoring=0x7f030008;
-        public static final int row=0x7f030009;
+        public static final int fragment_generic_game=0x7f030005;
+        public static final int fragment_generic_history=0x7f030006;
+        public static final int fragment_generic_scoring=0x7f030007;
+        public static final int fragment_main_dummy=0x7f030008;
+        public static final int fragment_pinochle_game=0x7f030009;
+        public static final int fragment_pinochle_history=0x7f03000a;
+        public static final int fragment_pinochle_scoring=0x7f03000b;
+        public static final int row=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f090000;
