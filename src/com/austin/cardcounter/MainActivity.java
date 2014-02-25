@@ -314,7 +314,33 @@ public class MainActivity extends FragmentActivity implements
             }
         }
 
-	public class PinochlePagerAdapter extends FragmentStatePagerAdapter {
+	public abstract class GameTypeAdapter extends FragmentStatePagerAdapter {
+		public GameTypeAdapter(FragmentManager fm) {
+			super(fm);
+		}@
+		
+		Override
+		public int getCount() {
+			// Show 3 total pages.
+			return 3;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			Locale l = Locale.getDefault();
+			switch (position) {
+			case 0:
+				return getString(R.string.title_section1).toUpperCase(l);
+			case 1:
+				return getString(R.string.title_section2).toUpperCase(l);
+			case 2:
+				return getString(R.string.title_section3).toUpperCase(l);
+			}
+			return null;
+		}
+	}
+	
+	public class PinochlePagerAdapter extends GameTypeAdapter {
 
 		public PinochlePagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -351,29 +377,9 @@ public class MainActivity extends FragmentActivity implements
 				return fragment;
 			}
 		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 3;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
-		}
 	}
 	
-	public class FiveHundredPagerAdapter extends FragmentStatePagerAdapter {
+	public class FiveHundredPagerAdapter extends GameTypeAdapter {
 
 		public FiveHundredPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -410,29 +416,9 @@ public class MainActivity extends FragmentActivity implements
 				return fragment;
 			}
 		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 3;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
-		}
 	}
 
-	public class GenericPagerAdapter extends FragmentStatePagerAdapter {
+	public class GenericPagerAdapter extends GameTypeAdapter {
 
 		public GenericPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -468,26 +454,6 @@ public class MainActivity extends FragmentActivity implements
 				fragment.setArguments(args);
 				return fragment;
 			}
-		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 3;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
 		}
 	}
 	
