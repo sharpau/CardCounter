@@ -15,14 +15,17 @@
     <string name="lose_col">Losing Team</string>
     <string name="team1">Team 1</string>
     <string name="team2">Team 2</string>
+    <string name="team">T</string>
     <string name="add_scores_btn">Add Scores</string>
     <string name="undo_btn">Undo</string>
     <string name="clear_btn">Clear</string>
+    <string name="plus_btn">+Team</string>
     <string name="clear_history_btn">Clear History</string>
     <string name="current_bid_label">Current Bid</string>
     <string name="team_name_label">Team Name</string>
     <string name="total_score_label">Total Score</string>
     <string name="meld_pts_label">Meld Points</string>
+    <string name="pts_label">Points</string>
     <string name="trick_pts_label">Trick Points</string>
     <string name="trick_num_label">Tricks Taken</string>
     <string name="trump_suit_label">Trump Suit</string>

@@ -93,6 +93,7 @@ public class PinochleGameFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.clear:
 			clear(view);
+			break;
 		default:
 			break;
 		
