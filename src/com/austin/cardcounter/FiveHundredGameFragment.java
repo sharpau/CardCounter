@@ -238,7 +238,7 @@ public class FiveHundredGameFragment extends Fragment implements
 							addTeam2Score(250);
 						}
 						else {
-							addTeam2Score(10 * trick1val);
+							addTeam2Score(10 * trick2val);
 						}
 					}
 				}
